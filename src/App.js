@@ -15,6 +15,7 @@ const App = () => {
   const [current, setCurrent] = useState({});
   const [hourlyForecast, setHourlyForecast] = useState({});
   const [dailyForecast, setDailyForecast] = useState({});
+  const [alert, setAlert] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,6 +23,9 @@ const App = () => {
     setCurrent(data.current);
     setHourlyForecast(data.hourly);
     setDailyForecast(data.daily);
+    if (data.alerts) {
+      setAlert(data.alerts[0]);
+    }
     setLoading(false);
   }, []);
 
@@ -32,7 +36,7 @@ const App = () => {
       <Wrapper>
         <Header />
         <main>
-          <Overview forecast={current} />
+          <Overview forecast={current} alert={alert} />
           <Hourly forecast={hourlyForecast} />
           <Daily forecast={dailyForecast} />
           <Today forecast={current} />
