@@ -1,6 +1,54 @@
+.wrapper {
+  text-align: center;
+  padding: 1rem var(--x-padding);
+}
+
+.content {
+  max-width: var(--max-width);
+  margin: auto;
+}
+
 .image {
   max-width: 250px;
   height: auto;
   display: block;
-  margin: 5rem auto;
+  margin: 0 auto 1rem;
+}
+
+.temp {
+  font-size: 3.5rem;
+}
+
+.feelsLike {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alertButton {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.alertButton > * {
+  margin-right: 0.4rem;
+}
+
+.alert {
+  font-size: 0.8rem;
+  max-width: 500px;
+  text-align: left;
+  padding: 1rem;
+  margin: auto;
+  background: #ffffff;
+  color: #000000;
+}
+
+.alertTitle {
+  text-align: center;
+  margin-bottom: 1rem !important;
+}
+
+.alert > * {
+  margin-bottom: 0.5rem;
 }
