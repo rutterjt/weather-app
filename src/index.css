@@ -2,6 +2,9 @@
   box-sizing: border-box;
   font-size: 18px;
   line-height: 1.5;
+
+  --x-padding: 1.5rem;
+  --max-width: 900px;
 }
 
 *,
@@ -16,4 +19,21 @@ body {
   font-family: Nunito, sans-serif;
   font-weight: 800;
   color: white;
+}
+
+button {
+  background: transparent;
+  border: none;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --x-padding: 2rem;
+  }
 }
