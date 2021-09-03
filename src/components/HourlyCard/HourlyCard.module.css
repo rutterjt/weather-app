@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-width: 4rem;
+}
+
+.wrapper > img {
+  max-width: 1.5rem;
+}
