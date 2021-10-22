@@ -11,15 +11,32 @@ import Today from 'layout/Today';
 // data
 import data from 'data.json';
 
+import { geolocationFetch } from 'api';
+
 const App = () => {
   const [current, setCurrent] = useState({});
   const [hourlyForecast, setHourlyForecast] = useState({});
   const [dailyForecast, setDailyForecast] = useState({});
   const [alert, setAlert] = useState([]);
+
+  const [weather, setWeather] = useState('');
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const data = geolocationFetch();
+    if (!data) {
+      setError('Could not get current position');
+      console.log('Could not get current position');
+    } else {
+      setWeather(data);
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
+
     setCurrent(data.current);
     setHourlyForecast(data.hourly);
     setDailyForecast(data.daily);
