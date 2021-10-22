@@ -1,18 +1,17 @@
-export const geolocationFetch = async (type = 'weather') => {
-  const success = async ({ coords }) => {
-    const { latitude: lat, longitude: lon } = coords;
-    const response = await fetch(
-      `/.netlify/functions/api?type=${type}&lat=${lat}&lon=${lon}`
-    );
-    const data = await response.json();
-    return data;
-  };
+export const geolocationFetch = (type = 'weather') => {
+  return new Promise((resolve, reject) => {
+    const success = ({ coords }) => {
+      const { latitude: lat, longitude: lon } = coords;
+      fetch(`/.netlify/functions/api?type=${type}&lat=${lat}&lon=${lon}`)
+        .then((response) => response.json())
+        .then((data) => resolve(data));
+    };
+    const error = (err) => reject(err);
 
-  const error = () => null;
-
-  if (navigator.geolocation) {
-    return navigator.geolocation.getCurrentPosition(success, error);
-  } else {
-    return null;
-  }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      reject('Geolocation not authorized');
+    }
+  });
 };
