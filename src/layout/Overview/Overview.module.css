@@ -1,0 +1,56 @@
+.wrapper {
+  text-align: center;
+  padding: 1rem var(--x-padding);
+}
+
+.content {
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.image {
+  max-width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.temp {
+  font-size: 3.5rem;
+}
+
+.feelsLike {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alertButton {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.alertButton > * {
+  margin-right: 0.4rem;
+}
+
+.alert {
+  font-size: 0.8rem;
+  max-width: 500px;
+  text-align: left;
+  padding: 1rem;
+  margin: auto;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.1),
+    0px 12px 12px rgba(0, 0, 0, 0.08), 0px 20px 20px rgba(0, 0, 0, 0.05);
+}
+
+.alertTitle {
+  text-align: center;
+  margin-bottom: 1rem !important;
+}
+
+.alert > * {
+  margin-bottom: 0.5rem;
+}

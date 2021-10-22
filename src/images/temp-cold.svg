@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="196.72" height="346.48" version="1.1" viewBox="0 0 196.72 346.48" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1 {
+        fill: #bee9f7;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: #e4f1f5;
+      }
+
+      .cls-5 {
+        fill: #0a4d80;
+      }</style>
+  <linearGradient id="linear-gradient" x1="38.62" x2="105.42" y1="179.78" y2="246.58" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#076bba" offset="0"/>
+   <stop stop-color="#0060ab" offset="1"/>
+  </linearGradient>
+  <filter id="filter1498" x="-.21635" y="-.10181" width="1.4778" height="1.2248" color-interpolation-filters="sRGB">
+   <feFlood flood-color="rgb(0,0,0)" flood-opacity=".30196" result="flood"/>
+   <feComposite in="flood" in2="SourceGraphic" operator="in" result="composite1"/>
+   <feGaussianBlur in="composite1" result="blur" stdDeviation="12"/>
+   <feOffset dx="6" dy="6" result="offset"/>
+   <feComposite in="SourceGraphic" in2="offset" result="composite2"/>
+  </filter>
+ </defs>
+ <g transform="translate(27.425 27.939)" data-name="Layer 2">
+  <g id="_Layer_" data-name="&lt;Layer&gt;">
+   <path class="cls-1" d="m67.92 205.08a12.83 12.83 0 0 1-12.8-12.81v-162.93a12.82 12.82 0 1 1 25.63 0v162.93a12.85 12.85 0 0 1-12.83 12.81z"/>
+   <path class="cls-2" d="m80.75 167.43v-26.27h-25.63v26.27a51.41 51.41 0 1 0 25.63 0z" fill="url(#linear-gradient)"/>
+   <path class="cls-3" d="m94.5 155.38v-127.44a27.95 27.95 0 0 0-55.89 0v127.44a66.55 66.55 0 1 0 55.89 0zm-27.94 111.82a51.38 51.38 0 0 1-12.82-101.15v-138.11a12.81 12.81 0 0 1 25.61 0v138.11a51.38 51.38 0 0 1-12.79 101.15z"/>
+   <path class="cls-4" d="m95.88 156.77v-127.43a27.95 27.95 0 1 0-55.89 0v127.43a66.56 66.56 0 1 0 55.89 0zm-28 111.81a51.38 51.38 0 0 1-12.8-101.15v-138.09a12.82 12.82 0 1 1 25.63 0v138.09a51.38 51.38 0 0 1-12.79 101.15z" filter="url(#filter1498)"/>
+   <rect class="cls-5" x="83.39" y="66.25" width="12.49" height="7.65"/>
+   <rect class="cls-5" x="83.39" y="41.15" width="12.49" height="7.65"/>
+   <rect class="cls-5" x="83.39" y="91.36" width="12.49" height="7.65"/>
+   <rect class="cls-5" x="83.39" y="116.46" width="12.49" height="7.67"/>
+   <rect class="cls-5" x="83.39" y="141.58" width="12.49" height="7.65"/>
+  </g>
+ </g>
+</svg>
