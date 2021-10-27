@@ -4,8 +4,8 @@ import React from 'react';
 import s from './Header.module.css';
 
 // components
-import { FaMapMarkerAlt } from 'react-icons/fa';
-import { IoSettingsSharp } from 'react-icons/io5';
+// import { FaMapMarkerAlt } from 'react-icons/fa';
+// import { IoSettingsSharp } from 'react-icons/io5';
 
 // helpers
 import { capitalize } from 'helpers/format';
@@ -15,21 +15,19 @@ const Header = ({ title, subtitle }) => {
     <div className={s.wrapper}>
       <header className={s.content}>
         <div className={s.row}>
-          <button
+          {/* <button
             className={s.openBtn}
             aria-label="Get weather for current location"
           >
             <FaMapMarkerAlt />
-          </button>
+          </button> */}
           <div className={s.headings}>
-            <h1 className={s.location}>{capitalize(title)}</h1>
-            {subtitle && (
-              <h2 className={s.description}>{capitalize(subtitle)}</h2>
-            )}
+            <h1 className={s.title}>{capitalize(title)}</h1>
+            {subtitle && <p className={s.subtitle}>{capitalize(subtitle)}</p>}
           </div>
-          <button className={s.settingsBtn}>
+          {/* <button className={s.settingsBtn}>
             <IoSettingsSharp />
-          </button>
+          </button> */}
         </div>
       </header>
     </div>
