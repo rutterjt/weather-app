@@ -1,0 +1,12 @@
+.wrapper {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.content {
+  padding: 0 var(--x-padding);
+  max-width: var(--max-width);
+  margin: auto;
+}
