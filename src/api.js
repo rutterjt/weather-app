@@ -4,7 +4,8 @@ export const geolocationFetch = (type = 'weather') => {
       const { latitude: lat, longitude: lon } = coords;
       fetch(`/.netlify/functions/api?type=${type}&lat=${lat}&lon=${lon}`)
         .then((response) => response.json())
-        .then((data) => resolve(data));
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
     };
     const error = (err) => reject(err);
 
