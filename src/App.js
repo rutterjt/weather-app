@@ -1,66 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // components
-import Wrapper from 'layout/Wrapper';
-import Header from 'layout/Header';
-import Overview from 'layout/Overview';
-import Hourly from 'layout/Hourly';
-import Daily from 'layout/Daily';
-import Today from 'layout/Today';
+import LandingPage from 'components/LandingPage';
+import WeatherPage from 'components/WeatherPage';
 
-// data
-import data from 'data.json';
-
+// api
 import { geolocationFetch } from 'api';
 
+const isStale = (time) => {
+  return Date.now() > time + 600000;
+};
+
+// localStorage getter/setter functions
+const saveWeather = (data) => {
+  localStorage.setItem('weather', JSON.stringify(data));
+  localStorage.setItem('time', JSON.stringify(Date.now()));
+};
+const getItem = (item) => localStorage.getItem(item);
+const read = (item) => JSON.parse(getItem(item));
+const readWeather = () => read('weather');
+const readTime = () => read('time');
+
 const App = () => {
-  const [current, setCurrent] = useState({});
-  const [hourlyForecast, setHourlyForecast] = useState({});
-  const [dailyForecast, setDailyForecast] = useState({});
-  const [alert, setAlert] = useState([]);
+  const [weather, setWeather] = useState(() => {
+    return localStorage.getItem('weather') ? readWeather() : '';
+  });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const [weather, setWeather] = useState('');
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const data = geolocationFetch();
-    if (!data) {
-      setError('Could not get current position');
-      console.log('Could not get current position');
-    } else {
-      setWeather(data);
-    }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
+  // fetches weather data from the api
+  const fetchWeather = () => {
     setLoading(true);
+    geolocationFetch('weather')
+      .then((data) => {
+        setWeather(data);
+        saveWeather(data);
+        setError('');
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => setLoading(false));
+  };
 
-    setCurrent(data.current);
-    setHourlyForecast(data.hourly);
-    setDailyForecast(data.daily);
-    if (data.alerts) {
-      setAlert(data.alerts[0]);
-    }
-    setLoading(false);
-  }, []);
-
-  if (loading) {
-    return <h1>Loading</h1>;
-  } else {
+  // landing page: renders if no weather data has ever been fetched, or if the localStorage is not
+  if (!weather || isStale(readTime()))
     return (
-      <Wrapper>
-        <Header />
-        <main>
-          <Overview forecast={current} alert={alert} />
-          <Hourly forecast={hourlyForecast} />
-          <Daily forecast={dailyForecast} />
-          <Today forecast={current} />
-        </main>
-      </Wrapper>
+      <LandingPage
+        fetchWeather={fetchWeather}
+        error={error}
+        loading={loading}
+      />
     );
-  }
+  else
+    return (
+      <WeatherPage
+        weather={weather}
+        fetchWeather={fetchWeather}
+        error={error}
+        loading={loading}
+      />
+    );
 };
 
 export default App;

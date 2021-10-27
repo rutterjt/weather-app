@@ -50,3 +50,22 @@ export const getDayOfWeek = (seconds) => {
   ]; // Date.getDay() returns a number, 0-6, representing the day of the week, starting with Sunday
   return dayOfWeek[date.getDay()];
 };
+
+export const getMonthName = (seconds) => {
+  const date = parseDate(seconds);
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return months[date.getMonth()];
+};
