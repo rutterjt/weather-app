@@ -17,8 +17,7 @@ exports.handler = async (event, context) => {
 
   const { type: TYPE } = params;
 
-  const endpoint = `${API_URL}${TYPE}?${QUERY}&appid=${API_KEY}`;
-  console.log(endpoint);
+  const endpoint = `${API_URL}${TYPE}?${QUERY}&appid=${API_KEY}&units=imperial`;
 
   try {
     const response = await axios.get(endpoint);
