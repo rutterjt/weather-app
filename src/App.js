@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // components
 import LandingPage from 'components/LandingPage';
-import Wrapper from 'components/Wrapper';
+import WeatherPage from 'components/WeatherPage';
 
 // api
 import { geolocationFetch } from 'api';
-
-// helper functions
-import { getTimeOfDay } from 'helpers/time-of-day';
 
 const isStale = (time) => {
   return Date.now() > time + 600000;
 };
 
+// localStorage getter/setter functions
 const saveWeather = (data) => {
   localStorage.setItem('weather', JSON.stringify(data));
   localStorage.setItem('time', JSON.stringify(Date.now()));
 };
-
 const getItem = (item) => localStorage.getItem(item);
 const read = (item) => JSON.parse(getItem(item));
 const readWeather = () => read('weather');
@@ -28,37 +25,42 @@ const App = () => {
   const [weather, setWeather] = useState(() => {
     return localStorage.getItem('weather') ? readWeather() : '';
   });
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   if (!getItem('time') || isStale(readTime())) {
-  //     setLoading(true);
-  //     geolocationFetch('weather')
-  //       .then((data) => {
-  //         setWeather(data);
-  //         saveWeather(data);
-  //         console.log(data);
-  //         setError('');
-  //       })
-  //       .catch((err) => {
-  //         setError(err);
-  //       })
-  //       .finally(() => setLoading(false));
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, []);
+  // fetches weather data from the api
+  const fetchWeather = () => {
+    setLoading(true);
+    geolocationFetch('weather')
+      .then((data) => {
+        setWeather(data);
+        saveWeather(data);
+        setError('');
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => setLoading(false));
+  };
 
-  return <LandingPage />;
-
-  // if (loading) {
-  //   return <h1 style={{ color: 'black' }}>Loading</h1>;
-  // } else if (weather) {
-  //   return <Wrapper weather={weather} />;
-  // } else {
-  //   return <h1 style={{ color: 'black' }}>Error</h1>;
-  // }
+  // landing page: renders if no weather data has ever been fetched, or if the localStorage is not
+  if (!weather || isStale(readTime()))
+    return (
+      <LandingPage
+        fetchWeather={fetchWeather}
+        error={error}
+        loading={loading}
+      />
+    );
+  else
+    return (
+      <WeatherPage
+        weather={weather}
+        fetchWeather={fetchWeather}
+        error={error}
+        loading={loading}
+      />
+    );
 };
 
 export default App;
