@@ -6,12 +6,35 @@ import * as s from './Layout.module.css';
 
 // components
 import Background from 'components/Background';
+import LoadingOverlay from 'components/LoadingOverlay';
+import Footer from 'components/Footer';
 
-const Layout = ({ weatherID, timeOfDay, children }) => {
+const Layout = ({
+  weatherID,
+  timeOfDay,
+  loading,
+  header,
+  left,
+  right,
+  children,
+}) => {
   return (
     <div className={s.wrapper}>
+      {loading && <LoadingOverlay />}
       <Background weatherID={weatherID} timeOfDay={timeOfDay}>
-        <div className={s.content}>{children}</div>
+        <div className={s.contentWrap}>
+          <main className={s.content}>
+            {header}
+            {left && right && (
+              <div className={s.grid}>
+                {left}
+                {right}
+              </div>
+            )}
+            {children}
+          </main>
+          <Footer />
+        </div>
       </Background>
     </div>
   );
