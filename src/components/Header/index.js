@@ -7,7 +7,10 @@ import s from './Header.module.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoSettingsSharp } from 'react-icons/io5';
 
-const Header = () => {
+// helpers
+import { capitalize } from 'helpers/format';
+
+const Header = ({ title, subtitle }) => {
   return (
     <div className={s.wrapper}>
       <header className={s.content}>
@@ -18,7 +21,12 @@ const Header = () => {
           >
             <FaMapMarkerAlt />
           </button>
-          <h1 className={s.location}>Buffalo</h1>
+          <div className={s.headings}>
+            <h1 className={s.location}>{capitalize(title)}</h1>
+            {subtitle && (
+              <h2 className={s.description}>{capitalize(subtitle)}</h2>
+            )}
+          </div>
           <button className={s.settingsBtn}>
             <IoSettingsSharp />
           </button>
