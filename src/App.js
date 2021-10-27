@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
 // components
-import Wrapper from 'layout/Wrapper';
-import Header from 'layout/Header';
-// import Overview from 'layout/Overview';
-// import Hourly from 'layout/Hourly';
-// import Daily from 'layout/Daily';
-// import Today from 'layout/Today';
+import LandingPage from 'components/LandingPage';
+import Wrapper from 'components/Wrapper';
 
-// data
-// import data from 'data.json';
-
+// api
 import { geolocationFetch } from 'api';
 
+// helper functions
+import { getTimeOfDay } from 'helpers/time-of-day';
+
 const isStale = (time) => {
-  return Date.now() > time + 300000;
+  return Date.now() > time + 600000;
 };
 
 const saveWeather = (data) => {
@@ -32,33 +29,36 @@ const App = () => {
     return localStorage.getItem('weather') ? readWeather() : '';
   });
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!getItem('time') || isStale(readTime())) {
-      setLoading(true);
-      geolocationFetch('weather')
-        .then((data) => {
-          setWeather(data);
-          saveWeather(data);
-          setError('');
-        })
-        .catch((err) => {
-          setError(err);
-        })
-        .finally(() => setLoading(false));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!getItem('time') || isStale(readTime())) {
+  //     setLoading(true);
+  //     geolocationFetch('weather')
+  //       .then((data) => {
+  //         setWeather(data);
+  //         saveWeather(data);
+  //         console.log(data);
+  //         setError('');
+  //       })
+  //       .catch((err) => {
+  //         setError(err);
+  //       })
+  //       .finally(() => setLoading(false));
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // }, []);
 
-  if (loading) {
-    return <h1 style={{ color: 'black' }}>Loading</h1>;
-  } else {
-    return (
-      <Wrapper>
-        <Header />
-      </Wrapper>
-    );
-  }
+  return <LandingPage />;
+
+  // if (loading) {
+  //   return <h1 style={{ color: 'black' }}>Loading</h1>;
+  // } else if (weather) {
+  //   return <Wrapper weather={weather} />;
+  // } else {
+  //   return <h1 style={{ color: 'black' }}>Error</h1>;
+  // }
 };
 
 export default App;
