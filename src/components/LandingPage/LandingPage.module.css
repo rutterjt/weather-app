@@ -1,0 +1,18 @@
+.iconWrap {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnWrap {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnWrap button {
+  margin-bottom: 1rem;
+}

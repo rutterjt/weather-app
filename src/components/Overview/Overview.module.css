@@ -1,0 +1,41 @@
+.wrapper {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.tempOverview {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tempIcon {
+  max-width: 4rem;
+  margin-right: 0.5rem;
+  display: none;
+}
+
+.temp {
+  font-size: 3.5rem;
+}
+
+.feelsLike {
+  font-size: 1rem;
+}
+
+.tempScale {
+  font-size: 0.8em;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    text-align: left;
+  }
+  .tempOverview {
+    justify-content: flex-start;
+  }
+  .tempIcon {
+    display: block;
+  }
+}

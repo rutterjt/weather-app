@@ -1,0 +1,54 @@
+.wrapper {
+  padding-top: 2rem;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.degreesScale {
+  font-size: 0.8em;
+}
+
+.title,
+.subtitle {
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+}
+
+.list,
+.detailsList {
+  margin-bottom: 2rem;
+}
+
+.detailsList li {
+  margin-bottom: 1rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-between;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.flexLi {
+  display: flex;
+  justify-content: space-between;
+}
+
+.liBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.liBox :first-child {
+  font-weight: normal;
+}
