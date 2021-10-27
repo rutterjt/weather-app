@@ -32,3 +32,5 @@ export const getWindDirection = (deg) => {
 };
 
 export const getInHg = (hpa) => hpa * 0.029529983071445;
+
+export const mmToIn = (mm) => (mm * 0.0393701).toFixed(2);
