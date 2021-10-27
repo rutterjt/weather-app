@@ -1,9 +1,7 @@
 .wrapper {
-  padding: 1rem var(--x-padding) 3rem;
-}
-
-.content {
-  max-width: var(--max-width);
+  padding-top: 2rem;
+  width: 100%;
+  max-width: 400px;
   margin: auto;
 }
 
@@ -26,7 +24,7 @@
 
 .list,
 .detailsList {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .detailsList li {
@@ -35,4 +33,22 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   justify-content: space-between;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.flexLi {
+  display: flex;
+  justify-content: space-between;
+}
+
+.liBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.liBox :first-child {
+  font-weight: normal;
 }
