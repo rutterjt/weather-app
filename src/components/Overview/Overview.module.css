@@ -1,0 +1,29 @@
+.wrapper {
+  text-align: center;
+  padding: 1rem var(--x-padding);
+}
+
+.content {
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.image {
+  max-width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.temp {
+  font-size: 3.5rem;
+}
+
+.feelsLike {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tempScale {
+  font-size: 0.8em;
+}
