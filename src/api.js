@@ -16,3 +16,12 @@ export const geolocationFetch = (type = 'weather') => {
     }
   });
 };
+
+export const fetchGeolocation = (query) => {
+  return new Promise((resolve, reject) => {
+    fetch(`/.netlify/functions/geolocation?query=${query}`)
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((err) => reject(err));
+  });
+};
