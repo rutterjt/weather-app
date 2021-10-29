@@ -1,23 +1,14 @@
 const axios = require('axios');
 
 const API_URL = 'https://api.openweathermap.org/data/2.5/';
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.WEATHER_API_KEY;
 
 exports.handler = async (event, context) => {
   const params = event.queryStringParameters;
 
-  let QUERY;
-  if (params.lat && params.lon) {
-    QUERY = `lat=${params.lat}&lon=${params.lon}`;
-  } else if (params.cityid) {
-    QUERY = `id=${params.cityid}`;
-  } else {
-    QUERY = `q=${params.q}`;
-  }
+  const QUERY = `lat=${params.lat}&lon=${params.lon}`;
 
-  const { type: TYPE } = params;
-
-  const endpoint = `${API_URL}${TYPE}?${QUERY}&appid=${API_KEY}&units=imperial`;
+  const endpoint = `${API_URL}weather?${QUERY}&appid=${API_KEY}&units=imperial`;
 
   try {
     const response = await axios.get(endpoint);
