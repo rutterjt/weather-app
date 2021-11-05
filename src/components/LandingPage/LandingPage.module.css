@@ -5,12 +5,17 @@
   align-items: center;
 }
 
+.controls {
+  max-width: 300px;
+  margin: auto;
+}
+
 .btnWrap {
   padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .btnWrap button {
