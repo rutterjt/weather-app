@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useGlobalContext } from 'context';
 
@@ -34,9 +34,9 @@ const App = () => {
   const setLoading = update(SET_LOADING);
 
   // takes a coordinates object, fetches weather data from the api, updates state
-  const getWeather = () => {
+  const getWeather = (coords) => {
     setLoading(true);
-    fetchWeather(location)
+    fetchWeather(coords)
       .then((data) => {
         setWeather(data);
         saveWeather(data);
@@ -84,13 +84,19 @@ const App = () => {
       .finally(() => setLoading(false));
   };
 
-  if (weather && !isStale(time) && !isEmpty(location)) {
-    return (
-      <WeatherPage fetchWeather={getWeather} fetchLocation={getLocation} />
-    );
-  } else {
-    return <LandingPage setLocation={setLocation} />;
-  }
+  useEffect(() => {
+    getWeather({ latitude: 40.722133201018664, longitude: -74.10605365691892 });
+  }, []);
+  console.log(weather);
+
+  // if (weather && !isStale(time) && !isEmpty(location)) {
+  //   return (
+  //     <WeatherPage fetchWeather={getWeather} fetchLocation={getLocation} />
+  //   );
+  // } else {
+  //   return <LandingPage setLocation={setLocation} />;
+  // }
+  return null;
 };
 
 export default App;
