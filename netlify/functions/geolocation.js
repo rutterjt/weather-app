@@ -1,23 +1,13 @@
 const axios = require('axios');
 
-const API_URL = 'https://api.openweathermap.org/data/2.5/';
-const API_KEY = process.env.API_KEY;
+const API_URL = 'http://api.positionstack.com/v1/';
+const API_KEY = process.env.GEOLOCATION_API_KEY;
 
 exports.handler = async (event, context) => {
   const params = event.queryStringParameters;
+  const { query } = params;
 
-  let QUERY;
-  if (params.lat && params.lon) {
-    QUERY = `lat=${params.lat}&lon=${params.lon}`;
-  } else if (params.cityid) {
-    QUERY = `id=${params.cityid}`;
-  } else {
-    QUERY = `q=${params.q}`;
-  }
-
-  const { type: TYPE } = params;
-
-  const endpoint = `${API_URL}${TYPE}?${QUERY}&appid=${API_KEY}&units=imperial`;
+  const endpoint = `${API_URL}forward?access_key=${API_KEY}&query=${query}`;
 
   try {
     const response = await axios.get(endpoint);
