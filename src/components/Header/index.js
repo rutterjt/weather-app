@@ -1,7 +1,16 @@
 import React from 'react';
 
-// styles
-import s from './Header.module.css';
+// styled components
+import {
+  Wrapper,
+  Content,
+  Row,
+  OpenButton,
+  SettingsButton,
+  Headings,
+  Title,
+  SubTitle,
+} from './Header.styles';
 
 // components
 // import { FaMapMarkerAlt } from 'react-icons/fa';
@@ -12,25 +21,24 @@ import { capitalize } from 'helpers/format';
 
 const Header = ({ title, subtitle }) => {
   return (
-    <div className={s.wrapper}>
-      <header className={s.content}>
-        <div className={s.row}>
-          {/* <button
-            className={s.openBtn}
+    <Wrapper>
+      <Content>
+        <Row>
+          {/* <OpenButton
             aria-label="Get weather for current location"
           >
             <FaMapMarkerAlt />
-          </button> */}
-          <div className={s.headings}>
-            <h1 className={s.title}>{capitalize(title)}</h1>
-            {subtitle && <p className={s.subtitle}>{capitalize(subtitle)}</p>}
-          </div>
-          {/* <button className={s.settingsBtn}>
+          </OpenButton> */}
+          <Headings>
+            <Title>{capitalize(title)}</Title>
+            {subtitle && <SubTitle>{capitalize(subtitle)}</SubTitle>}
+          </Headings>
+          {/* <SettingsButton>
             <IoSettingsSharp />
-          </button> */}
-        </div>
-      </header>
-    </div>
+          </SettingsButton> */}
+        </Row>
+      </Content>
+    </Wrapper>
   );
 };
 

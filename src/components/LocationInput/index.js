@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import * as s from './LocationInput.module.css';
+// styled components
+import { Wrapper, InputWrap, Label, Input } from './LocationInput.styles';
 
+// components
 import LocationList from 'components/LocationList';
 import Spinner from 'components/Spinner';
 import { isEmpty } from 'helpers/utils';
@@ -44,22 +46,19 @@ const LocationInput = ({ setLocation }) => {
   }, [input]);
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.inputWrap}>
-        <label htmlFor="location-input" className={s.label}>
-          Or enter your location
-        </label>
-        <input
+    <Wrapper>
+      <InputWrap>
+        <Label htmlFor="location-input">Or enter your location</Label>
+        <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className={s.input}
         />
-      </div>
+      </InputWrap>
       {!isEmpty(locations) && (
         <LocationList locations={locations} setLocation={setLocation} />
       )}
-    </div>
+    </Wrapper>
   );
 };
 

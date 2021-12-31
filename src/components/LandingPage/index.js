@@ -1,7 +1,5 @@
 import React from 'react';
 
-import * as s from './LandingPage.module.css';
-
 // components
 import Layout from 'components/Layout';
 import Header from 'components/Header';
@@ -9,14 +7,14 @@ import WeatherImage from 'components/WeatherImage';
 import LocationButton from 'components/LocationButton';
 import LocationInput from 'components/LocationInput';
 
-const LandingPage = ({
-  fetchWeather,
-  fetchLocations,
-  error,
-  loading,
-  locations,
-  setLocation,
-}) => {
+// styled components
+import { IconWrap, Controls, ButtonWrap } from './LandingPage.styles';
+
+// store
+import { useStore } from 'store/useStore';
+import { SET_LOCATION } from 'store/actions';
+
+const LandingPage = () => {
   const weatherId = 100;
   const timeOfDay = 'day';
   return (
@@ -27,11 +25,11 @@ const LandingPage = ({
       header={<Header title="Weather App" />}
     >
       <div>
-        <div className={s.iconWrap}>
+        <IconWrap>
           <WeatherImage weatherID={weatherId} timeOfDay={timeOfDay} />
-        </div>
-        <div className={s.controls}>
-          <div className={s.btnWrap}>
+        </IconWrap>
+        <Controls>
+          <ButtonWrap>
             <LocationButton label="Detect location" callback={fetchWeather} />
             {error && (
               <p>
@@ -39,9 +37,9 @@ const LandingPage = ({
                 prevent getting your location.
               </p>
             )}
-          </div>
+          </ButtonWrap>
           <LocationInput locations={locations} setLocation={setLocation} />
-        </div>
+        </Controls>
       </div>
     </Layout>
   );

@@ -1,59 +1,56 @@
-.wrapper {
-  padding: 2rem 0 0;
-}
+import styled from 'styled-components';
 
-.content {
+export const Wrapper = styled.div`
+  padding: 2rem 0 0;
+`;
+
+export const Content = styled.header`
   max-width: var(--max-width);
   margin: auto;
-}
+`;
 
-.row {
+export const Row = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: flex-start;
-}
+`;
 
-.openBtn {
+export const OpenButton = styled.button`
   margin-right: 1rem;
   margin-bottom: 1rem;
-}
-
-.settingsBtn {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-}
-
-.openBtn,
-.settingsBtn {
   font-size: 1.5rem;
   line-height: 1;
-}
+`;
 
-.headings {
+export const SettingsButton = styled.button`
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1;
+`;
+
+export const Headings = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-}
+`;
 
-.title {
+export const Title = styled.h1`
   word-break: break-word;
   line-height: 1.3;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-}
-
-.subtitle {
-  font-size: 1rem;
-}
-
-@media screen and (min-width: 768px) {
-  .title {
+  @media screen and (min-width: 768px) {
     font-size: 3rem;
   }
-  .subtitle {
+`;
+
+export const SubTitle = styled.p`
+  font-size: 1rem;
+  @media screen and (min-width: 768px) {
     font-size: 1.25rem;
   }
-}
+`;

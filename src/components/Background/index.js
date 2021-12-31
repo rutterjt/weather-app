@@ -1,6 +1,7 @@
 import React from 'react';
 
-import * as s from './Background.module.css';
+// styled components
+import { Wrapper } from './Background.styles';
 
 // utils
 import { isInRange } from 'helpers/utils';
@@ -48,9 +49,8 @@ const Background = ({ weatherID, timeOfDay, children }) => {
   const isCorrectColor = ({ cases }) => cases.some(caseMatches);
 
   const color = colors.find(isCorrectColor);
-  const className = color ? color.color : 'lightBlue';
 
-  return <div className={s[className]}>{children}</div>;
+  return <Wrapper color={color.color}>{children}</Wrapper>;
 };
 
 export default Background;

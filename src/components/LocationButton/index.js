@@ -1,14 +1,17 @@
 import React from 'react';
 
-import * as s from './LocationButton.module.css';
-
+// font awesome
 import { FaLocationArrow } from 'react-icons/fa';
+
+// styled components
+import { Button } from './LocationButton.styles';
 
 const LocationButton = ({ label, callback }) => {
   return (
-    <button className={s.btn} onClick={callback}>
-      {label} <FaLocationArrow className={s.icon} />
-    </button>
+    <Button onClick={callback}>
+      {label}{' '}
+      <FaLocationArrow style={{ display: 'block', marginLeft: '0.25rem' }} />
+    </Button>
   );
 };
 

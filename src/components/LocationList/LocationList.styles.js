@@ -1,4 +1,6 @@
-.list {
+import styled from 'styled-components';
+
+export const List = styled.ul`
   padding: 1rem 0;
   text-align: left;
   background-color: hsl(190, 100%, 99%);
@@ -11,21 +13,21 @@
   border-radius: 0.5rem;
   max-height: 300px;
   overflow-y: auto;
-}
+`;
 
-.item {
+export const Item = styled.li`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
-}
+`;
 
-.btn {
+export const Button = styled.button`
   display: block;
   padding: 1rem;
   text-align: left;
   width: 100%;
   font-weight: normal;
-}
 
-.btn:hover {
-  background-color: hsl(190, 100%, 90%);
-}
+  &:hover {
+    background-color: hsl(190, 100%, 90%);
+  }
+`;

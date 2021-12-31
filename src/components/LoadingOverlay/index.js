@@ -1,14 +1,16 @@
 import React from 'react';
 
-import * as s from './LoadingOverlay.module.css';
+// styled components
+import { Wrapper } from './LoadingOverlay.styles';
 
+// components
 import Spinner from 'components/Spinner';
 
 const LoadingOverlay = () => {
   return (
-    <div className={s.wrapper}>
+    <Wrapper>
       <Spinner />
-    </div>
+    </Wrapper>
   );
 };
 
