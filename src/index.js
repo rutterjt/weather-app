@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+// global styling
+import CSSReset from 'globalStyles';
+
+// App
 import App from './App';
 
-import GlobalProvider from './context';
+// store
+import StoreProvider from 'store/context';
+
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalProvider>
+    <StoreProvider>
+      <CSSReset />
       <App />
-    </GlobalProvider>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
