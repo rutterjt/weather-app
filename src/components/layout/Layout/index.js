@@ -1,9 +1,9 @@
 import React from 'react';
 
 // components
-import Background from 'components/Background';
+import Background from 'components/layout/Background';
 import LoadingOverlay from 'components/LoadingOverlay';
-import Footer from 'components/Footer';
+import Footer from 'components/layout/Footer';
 
 // styled components
 import { Wrapper, ContentWrapper, Content, Grid } from './Layout.styles';

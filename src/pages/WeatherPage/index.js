@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // components
-import Layout from 'components/Layout';
+import Layout from 'components/layout/Layout';
 import Header from 'components/Header';
 import Overview from 'components/Overview';
 import Details from 'components/Details';
@@ -9,14 +9,13 @@ import LoadWeather from 'components/LoadWeather';
 
 // helpers
 import { getTimeOfDay } from 'helpers/time-of-day';
-import { useGlobalContext } from 'context';
-import { useEffect } from 'react/cjs/react.development';
+import { useStore } from 'store/useStore';
 import { isStale } from 'helpers/time';
 import { readTime } from 'helpers/storage';
 import { isEmpty } from 'helpers/utils';
 
 const WeatherPage = ({ fetchWeather }) => {
-  const { weather, loading } = useGlobalContext();
+  const { weather, loading } = useStore();
 
   const { name: location } = weather;
   const {

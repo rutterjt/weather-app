@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { yellow } from 'styles/palette';
+
 export const Wrapper = styled.div`
   padding-top: 1.5rem;
   display: flex;
@@ -30,6 +32,6 @@ export const Input = styled.input`
   margin-bottom: 0.1rem;
 
   &:focus {
-    outline: 2px solid var(--dark-yellow);
+    outline: 2px solid ${yellow.dark};
   }
 `;

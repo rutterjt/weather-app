@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
+import { maxWidth } from 'styles/layout';
+
 export const Wrapper = styled.div`
   padding: 2rem 0 0;
 `;
 
 export const Content = styled.header`
-  max-width: var(--max-width);
+  max-width: ${maxWidth};
   margin: auto;
 `;
 
