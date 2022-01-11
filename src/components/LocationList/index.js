@@ -1,6 +1,7 @@
 import React from 'react';
 
-import * as s from './LocationList.module.css';
+// styled components
+import { List, Item, Button } from './LocationList.styles';
 
 import { isEmpty } from 'helpers/utils';
 
@@ -9,18 +10,16 @@ const LocationList = ({ locations, setLocation }) => {
 
   if (!isEmpty(locations)) {
     return (
-      <ul className={s.list}>
+      <List>
         {locations.map((location, index) => {
           const { label } = location;
           return (
-            <li key={index} className={s.item}>
-              <button onClick={() => set(location)} className={s.btn}>
-                {label}
-              </button>
-            </li>
+            <Item key={index}>
+              <Button onClick={() => set(location)}>{label}</Button>
+            </Item>
           );
         })}
-      </ul>
+      </List>
     );
   } else {
     return null;

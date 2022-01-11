@@ -1,4 +1,6 @@
-.btn {
+import styled from 'styled-components';
+
+export const Button = styled.button`
   background-color: #ff8c00;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -8,13 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.btn:hover {
-  background-color: #ffc543;
-}
-
-.icon {
-  display: block;
-  margin-left: 0.25rem;
-}
+  &:hover {
+    background-color: #ffc543;
+  }
+`;

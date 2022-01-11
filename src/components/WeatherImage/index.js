@@ -4,7 +4,7 @@ import React from 'react';
 import { isInRange } from 'helpers/utils';
 
 // image imports
-import Thunderstorm from 'images/thunderstorm-dark.svg';
+import Thunderstorm from 'images/thunderstorm.svg';
 import Rain from 'images/rain.svg';
 import Mix from 'images/mix.svg';
 import Snow from 'images/snow.svg';

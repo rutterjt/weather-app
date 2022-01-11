@@ -1,10 +1,18 @@
 import React from 'react';
 
-import * as s from './Footer.module.css';
+// styled components
+import styled from 'styled-components';
+
+const Wrapper = styled.footer`
+  padding-top: 3rem;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  font-size: 0.8rem;
+`;
 
 const Footer = () => {
   return (
-    <footer className={s.footer}>
+    <Wrapper>
       <p>
         Copyright {new Date().getFullYear()},{' '}
         <a href="https://github.com/jonrutter" target="_blank" rel="noreferrer">
@@ -12,7 +20,7 @@ const Footer = () => {
         </a>
         .
       </p>
-    </footer>
+    </Wrapper>
   );
 };
 

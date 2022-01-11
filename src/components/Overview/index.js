@@ -1,7 +1,14 @@
 import React from 'react';
 
 // styles
-import s from './Overview.module.css';
+import {
+  Wrapper,
+  TempOverview,
+  TempIcon,
+  Temp,
+  FeelsLike,
+  TempScale,
+} from './Overview.styles';
 
 // components
 import WeatherImage from 'components/WeatherImage';
@@ -13,25 +20,20 @@ import TempCold from 'images/temp-cold.svg';
 const Overview = ({ weatherID, timeOfDay, temp, feelsLike }) => {
   const freezingPoint = 32;
   return (
-    <div className={s.wrapper}>
+    <Wrapper>
       <WeatherImage weatherID={weatherID} timeOfDay={timeOfDay} />
-      <div className={s.tempOverview}>
-        <img
-          src={temp >= freezingPoint ? TempWarm : TempCold}
-          alt=""
-          className={s.tempIcon}
-        />
+      <TempOverview>
+        <TempIcon src={temp >= freezingPoint ? TempWarm : TempCold} alt="" />
         <div>
-          <h2 className={s.temp} aria-label={`${temp} degrees`}>
-            {Math.round(temp)}°<span className={s.tempScale}>F</span>
-          </h2>
-          <h3 className={s.feelsLike}>
-            Feels like: {Math.round(feelsLike)}°
-            <span className={s.tempScale}>F</span>
-          </h3>
+          <Temp aria-label={`${temp} degrees`}>
+            {Math.round(temp)}°<TempScale>F</TempScale>
+          </Temp>
+          <FeelsLike>
+            Feels like: {Math.round(feelsLike)}°<TempScale>F</TempScale>
+          </FeelsLike>
         </div>
-      </div>
-    </div>
+      </TempOverview>
+    </Wrapper>
   );
 };
 

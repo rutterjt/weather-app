@@ -1,23 +1,24 @@
-.iconWrap {
+import styled from 'styled-components';
+
+export const IconWrap = styled.div`
   padding: 2rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+`;
 
-.controls {
+export const Controls = styled.div`
   max-width: 300px;
   margin: auto;
-}
+`;
 
-.btnWrap {
+export const ButtonWrap = styled.div`
   padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
-}
 
-.btnWrap button {
-  margin-bottom: 1rem;
-}
+  & button {
+    margin-bottom: 1rem;
+  }
+`;

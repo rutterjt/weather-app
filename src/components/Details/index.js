@@ -1,7 +1,16 @@
 import React from 'react';
 
 // styles
-import * as s from './Details.module.css';
+import {
+  Wrapper,
+  DegreesScale,
+  Title,
+  SubTitle,
+  List,
+  DetailsList,
+  FlexListItem,
+  LiBox,
+} from './Details.styles';
 
 // helpers
 import { getDayOfWeek, getHourAndMinute, getMonthName } from 'helpers/date';
@@ -12,7 +21,7 @@ import { getInHg, mmToIn } from 'helpers/format';
 const F = () => {
   return (
     <span>
-      ° <span className={s.degreesScale}>F</span>
+      ° <DegreesScale>F</DegreesScale>
     </span>
   );
 };
@@ -29,9 +38,9 @@ const Details = ({ weather, main, sys, wind, clouds, rain, snow }) => {
   const has = (prop) => prop !== undefined;
 
   return (
-    <div className={s.wrapper}>
-      <h2 className={s.title}>Today's Details</h2>
-      <ul className={s.list}>
+    <Wrapper>
+      <Title>Today's Details</Title>
+      <List>
         <li>
           <div>
             {getDayOfWeek(now)}, {getMonthName(now)} {today.getDate()},{' '}
@@ -42,20 +51,20 @@ const Details = ({ weather, main, sys, wind, clouds, rain, snow }) => {
             <F />, {description}.
           </div>
         </li>
-        <li className={s.flexLi}>
-          <div className={s.liBox}>
+        <FlexListItem>
+          <LiBox>
             <span>Sunrise:</span>
             <span>{getHourAndMinute(sunrise)}</span>
-          </div>
-          <div className={s.liBox}>
+          </LiBox>
+          <LiBox>
             <span>Sunset:</span>
             <span>{getHourAndMinute(sunset)}</span>
-          </div>
-        </li>
-      </ul>
+          </LiBox>
+        </FlexListItem>
+      </List>
 
-      <h3 className={s.subtitle}>Current Conditions</h3>
-      <ul className={s.detailsList}>
+      <SubTitle>Current Conditions</SubTitle>
+      <DetailsList>
         {has(temp) && (
           <li>
             <span>Temperature: </span>
@@ -120,8 +129,8 @@ const Details = ({ weather, main, sys, wind, clouds, rain, snow }) => {
             <span>{cloudCover}%</span>
           </li>
         )}
-      </ul>
-    </div>
+      </DetailsList>
+    </Wrapper>
   );
 };
 

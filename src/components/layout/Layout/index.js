@@ -1,13 +1,12 @@
 import React from 'react';
 
-import * as s from './Layout.module.css';
-
-// import Wrapper from 'components/Wrapper';
-
 // components
-import Background from 'components/Background';
+import Background from 'components/layout/Background';
 import LoadingOverlay from 'components/LoadingOverlay';
-import Footer from 'components/Footer';
+import Footer from 'components/layout/Footer';
+
+// styled components
+import { Wrapper, ContentWrapper, Content, Grid } from './Layout.styles';
 
 const Layout = ({
   weatherID,
@@ -19,24 +18,24 @@ const Layout = ({
   children,
 }) => {
   return (
-    <div className={s.wrapper}>
+    <Wrapper>
       {loading && <LoadingOverlay />}
       <Background weatherID={weatherID} timeOfDay={timeOfDay}>
-        <div className={s.contentWrap}>
-          <main className={s.content}>
+        <ContentWrapper>
+          <Content>
             {header}
             {left && right && (
-              <div className={s.grid}>
+              <Grid>
                 {left}
                 {right}
-              </div>
+              </Grid>
             )}
             {children}
-          </main>
+          </Content>
           <Footer />
-        </div>
+        </ContentWrapper>
       </Background>
-    </div>
+    </Wrapper>
   );
 };
 

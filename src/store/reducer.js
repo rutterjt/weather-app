@@ -2,10 +2,7 @@
 import { readWeather, readLocation, getItem } from 'helpers/storage';
 
 // action types
-export const SET_WEATHER = 'SET_WEATHER';
-export const SET_LOCATION = 'SET_LOCATION';
-export const SET_ERROR = 'SET_ERROR';
-export const SET_LOADING = 'SET_LOADING';
+import { SET_WEATHER, SET_LOCATION, SET_ERROR, SET_LOADING } from './actions';
 
 // default state
 export const defaultState = {
