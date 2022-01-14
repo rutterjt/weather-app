@@ -1,4 +1,5 @@
 import React from 'react';
+import { client } from './api/client';
 
 // import { SET_WEATHER, SET_LOCATION, SET_ERROR, SET_LOADING } from 'reducer';
 
@@ -19,17 +20,27 @@ import React from 'react';
 // import { isEmpty } from 'helpers/utils';
 
 // lodash helpers
-import isEmpty from 'lodash/isEmpty';
+// import isEmpty from 'lodash/isEmpty';
 
 // components
-import LandingPage from 'pages/LandingPage';
-import WeatherPage from 'pages/WeatherPage';
+// import LandingPage from 'pages/LandingPage';
+// import WeatherPage from 'pages/WeatherPage';
 
 // store
-import { useStore } from 'store/useStore';
+// import { useStore } from 'store/useStore';
 
 const App = () => {
-  const { location } = useStore();
+  const fetchData = async () => {
+    const response = await client.get('/location');
+    console.log(response.data);
+  };
+
+  fetchData();
+
+  // fetch('/location')
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
+  // const { location } = useStore();
 
   // const update = (type) => (payload) => dispatch({ type, payload });
   // const setWeather = update(SET_WEATHER);
@@ -95,11 +106,16 @@ const App = () => {
 
   // if there is no location saved, load the landing page to allow the user to select a location
   // if there is a location saved, jump straight to fetching the weather
-  if (isEmpty(location)) {
-    return <LandingPage />;
-  } else {
-    return <WeatherPage />;
-  }
+  // if (isEmpty(location)) {
+  //   return <LandingPage />;
+  // } else {
+  //   return <WeatherPage />;
+  // }
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+    </div>
+  );
 };
 
 export default App;
