@@ -1,5 +1,17 @@
 import React from 'react';
-import { client } from './api/client';
+
+// lodash
+import { isEmpty } from 'lodash';
+
+// redux
+import { useSelector } from 'react-redux';
+
+// selectors
+import { selectLocationCoords } from './features/location/locationSlice';
+
+// components
+import WeatherPage from './features/weather/WeatherPage';
+import LocationPage from './features/location/LocationPage';
 
 // import { SET_WEATHER, SET_LOCATION, SET_ERROR, SET_LOADING } from 'reducer';
 
@@ -30,12 +42,9 @@ import { client } from './api/client';
 // import { useStore } from 'store/useStore';
 
 const App = () => {
-  const fetchData = async () => {
-    const response = await client.get('/location');
-    console.log(response.data);
-  };
+  const location = useSelector(selectLocationCoords);
 
-  fetchData();
+  const isLocation = location && !isEmpty(location);
 
   // fetch('/location')
   //   .then((response) => response.json())
@@ -111,11 +120,12 @@ const App = () => {
   // } else {
   //   return <WeatherPage />;
   // }
-  return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
-  );
+
+  if (isLocation) {
+    return <WeatherPage />;
+  } else {
+    return <LocationPage />;
+  }
 };
 
 export default App;
