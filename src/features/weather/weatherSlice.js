@@ -5,8 +5,7 @@ import { client } from '../../api/client';
 const initialState = {
   status: 'idle',
   error: null,
-  weather: null,
-  forecast: null,
+  current: null,
 };
 
 export const fetchWeather = createAsyncThunk(
@@ -27,10 +26,11 @@ const weatherSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
-        const { weather, forecast } = action.payload;
         state.status = 'succeeded';
-        state.weather = weather;
-        state.forecast = forecast;
+        if (action.payload.weather) {
+          state.current = action.payload.weather;
+        }
+        state.error = null;
       })
       .addCase(fetchWeather.rejected, (state, action) => {
         state.status = 'failed';
@@ -41,7 +41,6 @@ const weatherSlice = createSlice({
 
 export default weatherSlice.reducer;
 
-export const selectWeatherState = (state) => state.weather;
+export const selectWeather = (state) => state.weather;
 
-export const selectWeather = (state) => selectWeatherState(state).weather;
-export const selectForecast = (state) => selectWeatherState(state).forecast;
+export const selectCurrentWeather = (state) => selectWeather(state).current;
