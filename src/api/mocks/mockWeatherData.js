@@ -1,20 +1,44 @@
 import setHours from 'date-fns/setHours';
 
+import { getRandomWeatherType } from './mockWeatherTypes';
+
+const getRandom = (min, max) => Math.random() * (max - min + 1) + min;
+
+const getRandomFloat = (min, max) => {
+  return Number(getRandom(min, max).toFixed(2));
+};
+
+const getRandomInt = (min, max) => Math.floor(getRandom(min, max));
+
+const getRandomMainDetails = () => {
+  const temp = getRandomFloat(-10, 36);
+  const feels_like = getRandomFloat(temp - 20, temp);
+  const temp_min = getRandomFloat(temp - 10, temp);
+  const temp_max = getRandomFloat(temp, temp + 10);
+  const pressure = getRandomInt(1000, 1080);
+  const humidity = getRandomInt(0, 100);
+  return {
+    temp,
+    feels_like,
+    temp_min,
+    temp_max,
+    pressure,
+    humidity,
+  };
+};
+
 export const mockWeatherData = {
   coord: { lon: -78.8529, lat: 42.8908 },
-  weather: [{ id: 701, main: 'Mist', description: 'mist', icon: '50d' }],
+  weather: [getRandomWeatherType()],
   base: 'stations',
-  main: {
-    temp: 36.18,
-    feels_like: 36.18,
-    temp_min: 31.82,
-    temp_max: 40.5,
-    pressure: 1010,
-    humidity: 86,
-  },
+  main: getRandomMainDetails(),
   visibility: 4023,
-  wind: { speed: 1.99, deg: 308, gust: 4 },
-  clouds: { all: 100 },
+  wind: {
+    speed: getRandomFloat(0, 35),
+    deg: getRandomInt(0, 360),
+    gust: getRandomInt(0, 45),
+  },
+  clouds: { all: getRandomInt(1, 100) },
   dt: Date.now(),
   sys: {
     type: 2,
@@ -22,6 +46,9 @@ export const mockWeatherData = {
     country: 'US',
     sunrise: setHours(Date.now(), 7).getTime(),
     sunset: setHours(Date.now(), 17).getTime(),
+  },
+  snow: {
+    '1h': getRandomInt(0, 200),
   },
   timezone: -18000,
   id: 5110629,

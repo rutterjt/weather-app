@@ -61,9 +61,9 @@ export const mockForecastData = {
       },
       weather: [
         {
-          id: 804,
-          main: 'Clouds',
-          description: 'overcast clouds',
+          id: 602,
+          main: 'Snow',
+          description: 'heavy snow',
           icon: '04n',
         },
       ],
@@ -89,9 +89,9 @@ export const mockForecastData = {
       },
       weather: [
         {
-          id: 804,
-          main: 'Clouds',
-          description: 'overcast clouds',
+          id: 600,
+          main: 'Snow',
+          description: 'light snow',
           icon: '04n',
         },
       ],
@@ -117,9 +117,9 @@ export const mockForecastData = {
       },
       weather: [
         {
-          id: 804,
-          main: 'Clouds',
-          description: 'overcast clouds',
+          id: 600,
+          main: 'Snow',
+          description: 'light snow',
           icon: '04n',
         },
       ],
