@@ -1,5 +1,18 @@
 import React from 'react';
 
+// lodash
+import { isEmpty } from 'lodash';
+
+// redux
+import { useSelector } from 'react-redux';
+
+// selectors
+import { selectLocationCoords } from './features/location/locationSlice';
+
+// components
+import WeatherPage from './features/weather/WeatherPage';
+import LocationPage from './features/location/LocationPage';
+
 // import { SET_WEATHER, SET_LOCATION, SET_ERROR, SET_LOADING } from 'reducer';
 
 // api
@@ -19,17 +32,24 @@ import React from 'react';
 // import { isEmpty } from 'helpers/utils';
 
 // lodash helpers
-import isEmpty from 'lodash/isEmpty';
+// import isEmpty from 'lodash/isEmpty';
 
 // components
-import LandingPage from 'pages/LandingPage';
-import WeatherPage from 'pages/WeatherPage';
+// import LandingPage from 'pages/LandingPage';
+// import WeatherPage from 'pages/WeatherPage';
 
 // store
-import { useStore } from 'store/useStore';
+// import { useStore } from 'store/useStore';
 
 const App = () => {
-  const { location } = useStore();
+  const location = useSelector(selectLocationCoords);
+
+  const isLocation = location && !isEmpty(location);
+
+  // fetch('/location')
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
+  // const { location } = useStore();
 
   // const update = (type) => (payload) => dispatch({ type, payload });
   // const setWeather = update(SET_WEATHER);
@@ -95,10 +115,16 @@ const App = () => {
 
   // if there is no location saved, load the landing page to allow the user to select a location
   // if there is a location saved, jump straight to fetching the weather
-  if (isEmpty(location)) {
-    return <LandingPage />;
-  } else {
+  // if (isEmpty(location)) {
+  //   return <LandingPage />;
+  // } else {
+  //   return <WeatherPage />;
+  // }
+
+  if (isLocation) {
     return <WeatherPage />;
+  } else {
+    return <LocationPage />;
   }
 };
 
