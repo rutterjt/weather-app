@@ -8,7 +8,6 @@ const DELAY = 1000;
 
 export const handlers = [
   rest.get('/location', (req, res, ctx) => {
-    console.log('Testing');
     return res(ctx.delay(DELAY), ctx.status(200), ctx.json(mockLocationData));
   }),
   rest.get('/weather', (req, res, ctx) => {

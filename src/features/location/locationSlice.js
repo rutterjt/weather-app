@@ -81,10 +81,8 @@ const locationSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase('weather/fetchWeather/fulfilled', (state, action) => {
-        console.log(action.payload.weather.name);
         if (!state.name && get(action, 'payload.weather.name')) {
           // Browser geolocation doesn't provide a place name. Because OpenWeatherMap does provide a place name, use this as a convenient default if none otherise specified
-          console.log('Name: ', action.payload.weather.name);
           state.name = action.payload.weather.name;
         }
       })
