@@ -12,8 +12,7 @@ const StyledButton = styled.button`
   position: relative;
   padding: 1.25rem 1rem;
   border-radius: 0.25rem;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05), 0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 10px rgba(0, 0, 0, 0.12);
+  ${(props) => props.theme.shadow}
   transition: all 0.2s;
   font-weight: bold;
   overflow: hidden;

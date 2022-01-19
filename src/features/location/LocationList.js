@@ -15,8 +15,7 @@ const List = styled.ul`
   text-align: left;
   background-color: #fff;
   color: #000;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05), 0px 4px 4px rgba(0, 0, 0, 0.08),
-    0px 10px 10px rgba(0, 0, 0, 0.12);
+  ${(props) => props.theme.shadow}
   display: flex;
   flex-direction: column;
   border-radius: 0.25rem;
