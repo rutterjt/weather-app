@@ -3,11 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 2rem 1.5rem 2rem;
-  min-height: calc(100vh - 4rem);
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 6rem);
   height: 100%;
   @media screen and (min-width: 768px) {
-    padding-x: 2rem 2rem 0;
+    padding: 2rem 2rem;
   }
 `;
 

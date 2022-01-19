@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   text-align: center;
-  padding-top: 2rem;
+  padding: 2rem;
 `;
 
 const Copyright = styled.p`
