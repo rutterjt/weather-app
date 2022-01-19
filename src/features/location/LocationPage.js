@@ -1,52 +1,61 @@
 import React from 'react';
 
-// redux
-import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
-import {
-  fetchLocations,
-  locationAdded,
-  selectLocations,
-  fetchLocationFromBrowser,
-} from './locationSlice';
+import WeatherImage from '../weather/WeatherImage';
+import LocationInput from './LocationInput';
+import LocationButton from './LocationButton';
 
-const LocationPage = () => {
-  const dispatch = useDispatch();
-  const locations = useSelector(selectLocations);
-
-  const getLocations = () => {
-    dispatch(fetchLocations());
-  };
-
-  const addLocation = (coords, name) => {
-    dispatch(locationAdded({ coords, name }));
-  };
-  const getLocationFromBrowser = () => {
-    dispatch(fetchLocationFromBrowser());
-  };
-
-  let locationListContent;
-  if (locations.length) {
-    locationListContent = locations.map((location, index) => {
-      const { coords, name } = location;
-      return (
-        <li key={index}>
-          <button onClick={() => addLocation(coords, name)}>
-            {name} ({coords.longitude}, {coords.latitude})
-          </button>
-        </li>
-      );
-    });
+const Title = styled.h1`
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-weight: 900;
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
   }
+`;
 
-  return (
-    <div>
-      <h1>We need your location to fetch the feather</h1>
-      <button onClick={getLocationFromBrowser}>Detect location</button>
-      <button onClick={getLocations}>Enter location</button>
-      {locations && <ul>{locationListContent}</ul>}
-    </div>
-  );
-};
+const ImageWrap = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const ButtonGrid = styled.div`
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  & > * {
+    margin-bottom: 2rem;
+  }
+`;
+
+const GridItem = styled.div`
+  flex: 1 1 200px;
+  position: relative;
+`;
+
+const LocationPage = () => (
+  <>
+    <Title>React Weather App</Title>
+    <ImageWrap>
+      <WeatherImage />
+    </ImageWrap>
+    <ButtonGrid>
+      <GridItem>
+        <LocationButton />
+      </GridItem>
+      <GridItem>
+        <LocationInput />
+      </GridItem>
+    </ButtonGrid>
+  </>
+);
 
 export default LocationPage;
