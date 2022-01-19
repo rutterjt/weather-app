@@ -1,5 +1,3 @@
-// TODO: persist location to localStorage. But defer that until more progress on UI, for testing purposes.
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { get, isEmpty } from 'lodash';
 
@@ -64,7 +62,7 @@ const locationSlice = createSlice({
       const { coords, name } = action.payload;
       if (coords && !isEmpty(coords)) {
         state.current.coords = coords;
-        state.current.status = 'idle';
+        state.current.status = 'succeeded';
         state.locations.entities = [];
         state.current.error = null;
         state.locations.error = null;

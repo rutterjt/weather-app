@@ -13,6 +13,11 @@ import { worker } from './api/server';
 import store from './app/store';
 
 import App from './App';
+import { saveState } from './app/localStorage';
+
+store.subscribe(() => {
+  saveState({ location: store.getState().location });
+});
 
 async function start() {
   // Start our mock API server
