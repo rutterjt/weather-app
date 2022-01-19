@@ -5,13 +5,20 @@ import styled from 'styled-components';
 
 // utils
 import get from 'lodash/get';
-import { isInRange } from 'helpers/utils';
 
-// styles
-import { gradients } from 'styles/palette';
+// redux
+import { useSelector } from 'react-redux';
+
+import {
+  selectTimeOfDay,
+  selectWeatherCode,
+} from '../features/weather/weatherSlice';
+
+// helpers
+import { isInRange } from '../helpers/utils';
 
 /*
-The background color depends on the time of day and current weather event:
+The background color depends on the time of day and current weather event's code:
 800-804 && Day: lightBlue
 800-804 && Twilight: yellow
 800-804 && Night: darkBlue
@@ -27,9 +34,14 @@ The background color depends on the time of day and current weather event:
 200-299: purple 
 */
 
-// maps background colors to 'case' objects
-// each case represents a scenario in which the background color renders
-// the case can include either/both: a time array (of 'day', 'twilight', or 'night'), and a range array (of subarrays representing ranges of weatherIDs)
+/**
+ * Array containing mappings of color strings to 'cases'.
+ *
+ * Each case is a scenario in which the color string should apply.
+ *
+ * The case can include either/both: an array of times (of 'day', 'twilight', or 'night'), and an array of ranges (each a subarray representing a range of color codes )
+ *
+ */
 const colors = [
   {
     color: 'lightBlue',
@@ -69,7 +81,6 @@ const colors = [
   },
   {
     color: 'darkCyan',
-    bg: 'linear-gradient(135deg, #4d9ecc, #28678b)',
     cases: [{ times: ['night'], ranges: [[600, 699], [511]] }],
   },
   {
@@ -86,19 +97,41 @@ const colors = [
   },
 ];
 
+// Styled components
 const Wrapper = styled.div`
   overflow: hidden;
   min-height: 100vh;
   height: 100%;
   width: 100%;
 
-  background: ${(props) => gradients[props.color]};
+  background: ${(props) =>
+    get(props.theme.gradients, `${props.color}`, '#fff')};
+  color: ${(props) => get(props.theme.palette, `${props.color}.text`, '#000')};
 `;
 
-const Background = ({ weatherID, timeOfDay, children }) => {
-  // curried function: takes a test callback function, returns a function that takes a cases array, which returns whether any of the cases array pass the test function
+/**
+ * Wrapper component for the app's background color.
+ *
+ * Selects the current weather code and time of day, and sets the app's background color and color based on those factors.
+ */
+const Background = ({ children }) => {
+  const weatherCode = useSelector(selectWeatherCode);
+  const timeOfDay = useSelector(selectTimeOfDay);
 
-  const isInWeatherRange = ({ ranges }) => ranges.some(isInRange(weatherID));
+  console.group('Weather info');
+  console.log('Weather Code:', weatherCode);
+  console.log('Time of Day:', timeOfDay);
+  console.groupEnd();
+
+  // Default to 'lightBlue' background if no weather code or time of day
+  if (!weatherCode || !timeOfDay) {
+    return <Wrapper color={'lightBlue'}>{children}</Wrapper>;
+  }
+
+  // deciding on background color
+
+  // helper functions
+  const isInWeatherRange = ({ ranges }) => ranges.some(isInRange(weatherCode));
   const isTimeOfDay = ({ times }) =>
     times ? times.indexOf(timeOfDay) !== -1 : true;
   const caseMatches = (testCase) =>
@@ -106,8 +139,8 @@ const Background = ({ weatherID, timeOfDay, children }) => {
   const isCorrectColor = ({ cases }) => cases.some(caseMatches);
 
   const color = colors.find(isCorrectColor);
-
-  const bg = get(color.bg, 'linear-gradient(135deg, #00d5ff, #00a7c9)');
+  const bg = get(color, 'color', 'lightBlue'); // fall back to lightblue if there was an error (e.g., timeOfDay/weatherCode combo does not yield a color, or the color object is missing a color key)
+  console.log('Color:', bg);
 
   return <Wrapper color={bg}>{children}</Wrapper>;
 };
