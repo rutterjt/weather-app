@@ -116,6 +116,7 @@ const locationSlice = createSlice({
       })
       .addCase(fetchLocationFromBrowser.pending, (state, action) => {
         state.current.status = 'loading';
+        state.current.error = null;
       })
       .addCase(fetchLocationFromBrowser.fulfilled, (state, action) => {
         state.current.status = 'succeeded';
