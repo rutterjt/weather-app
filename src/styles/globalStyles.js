@@ -14,7 +14,7 @@ const CSSReset = styled.createGlobalStyle`
   html {
     -moz-tab-size: 4;
     tab-size: 4;
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system,
+    font-family: 'Open Sans', ui-sans-serif, system-ui, -apple-system,
       BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
       'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
       'Segoe UI Symbol', 'Noto Color Emoji';
@@ -215,6 +215,10 @@ const CSSReset = styled.createGlobalStyle`
     font-weight: inherit;
   }
 
+  h1 {
+    font-weight: bold;
+  }
+
   a {
     color: inherit;
     text-decoration: inherit;
@@ -228,6 +232,7 @@ const CSSReset = styled.createGlobalStyle`
     padding: 0;
     line-height: inherit;
     color: inherit;
+    border: none;
   }
 
   pre,
