@@ -1,10 +1,9 @@
+import React, { useEffect, useRef, useCallback } from 'react';
+
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ErrorMessage = styled.div`
-  ${
-    '' /* position: absolute;
-  top: 3.5rem; */
-  }
+const StyledErrorMessage = styled.div`
   position: relative;
   margin-top: 0.5rem;
   background-color: #fff;
@@ -29,5 +28,49 @@ const ErrorMessage = styled.div`
     border-top-left-radius: 0.25rem;
   }
 `;
+
+const ErrorMessage = ({ open, handleClose, children }) => {
+  const componentRef = useRef(null);
+
+  // setting/unsetting the click-away listener
+  const checkClose = useCallback(
+    (e) => {
+      // only close the message if the click target is not the same node as the message
+      if (e.target !== componentRef.current) handleClose();
+    },
+    [componentRef, handleClose]
+  );
+  useEffect(() => {
+    const clearListener = () =>
+      document.body.removeEventListener('click', checkClose);
+    if (open) {
+      // set the event listener when the box is open
+      document.body.addEventListener('click', checkClose);
+    } else {
+      // clear the event listener when the box is closed
+      clearListener();
+    }
+    // clear on unmount
+    return () => clearListener();
+  }, [open, checkClose]);
+
+  if (open) {
+    return (
+      <StyledErrorMessage ref={componentRef}>{children}</StyledErrorMessage>
+    );
+  } else {
+    return null;
+  }
+};
+
+ErrorMessage.defaultProps = {
+  open: false,
+};
+
+ErrorMessage.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default ErrorMessage;

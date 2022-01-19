@@ -68,7 +68,7 @@ const LocationInput = () => {
   const fetchLocationsError = useSelector(
     (state) => state.location.locations.error
   );
-
+  const [errorOpen, setErrorOpen] = useState(!!fetchLocationsError); // maintain separate state for error ui, so the error message can be closed
   const [input, setInput] = useState('');
   const initial = useRef(true); // prevent geolocation fetch on page load
   const [active, setActive] = useState(false);
@@ -107,6 +107,13 @@ const LocationInput = () => {
     if (input === '') setActive(false);
   };
 
+  const closeError = () => setErrorOpen(false);
+
+  useEffect(() => {
+    if (fetchLocationsError) setErrorOpen(true);
+    else setErrorOpen(false);
+  }, [fetchLocationsError]);
+
   return (
     <>
       <Wrapper>
@@ -125,9 +132,9 @@ const LocationInput = () => {
         </InputWrap>
         <LocationList open={active} />
       </Wrapper>
-      {fetchLocationsError ? (
-        <ErrorMessage>{fetchLocationsError}</ErrorMessage>
-      ) : null}
+      <ErrorMessage open={errorOpen} handleClose={closeError}>
+        {fetchLocationsError}
+      </ErrorMessage>
     </>
   );
 };

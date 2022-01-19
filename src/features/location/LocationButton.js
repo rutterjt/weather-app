@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -22,19 +22,27 @@ const LocationButton = () => {
   const fetchLocationError = useSelector(
     (state) => state.location.current.error
   );
+  const [errorOpen, setErrorOpen] = useState(!!fetchLocationError); // maintain separate state for error ui, so the error message can be closed
 
   const getLocationFromBrowser = () => {
     dispatch(fetchLocationFromBrowser());
   };
+
+  const closeError = () => setErrorOpen(false);
+
+  useEffect(() => {
+    if (fetchLocationError) setErrorOpen(true);
+    else setErrorOpen(false);
+  }, [fetchLocationError]);
 
   return (
     <>
       <StyledButton onClick={getLocationFromBrowser} color="yellow">
         <FaLocationArrow /> Detect Location
       </StyledButton>
-      {fetchLocationError ? (
-        <ErrorMessage>{fetchLocationError}</ErrorMessage>
-      ) : null}
+      <ErrorMessage open={errorOpen} handleClose={closeError}>
+        {fetchLocationError}
+      </ErrorMessage>
     </>
   );
 };
