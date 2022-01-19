@@ -96,7 +96,7 @@ const LocationInput = () => {
         if (input.trim()) getLocations(input);
         else clearLocations();
         // else clearLocations();
-      }, 2000);
+      }, 1500);
       return () => clearTimeout(timeout);
     }
   }, [input, getLocations, clearLocations]);
