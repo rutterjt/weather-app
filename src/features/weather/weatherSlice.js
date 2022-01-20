@@ -7,6 +7,9 @@ import {
 // helpers
 import { get } from 'lodash';
 import differenceInMinutes from 'date-fns/differenceInMinutes';
+import { mmToIn } from '../../helpers/format';
+import { getInHg } from '../../helpers/format';
+import { getWindDirection } from '../../helpers/format';
 
 import { client } from '../../api/client';
 
@@ -53,22 +56,35 @@ export const selectWeather = (state) => state.weather;
 
 export const selectCurrentWeather = (state) => selectWeather(state).current;
 
-export const selectWeatherCode = (state) => {
-  const currentWeather = selectCurrentWeather(state);
-  return get(currentWeather, 'weather[0].id');
-};
+export const selectWeatherCode = createSelector(
+  selectCurrentWeather,
+  (current) => get(current, 'weather[0].id')
+);
 
-export const selectWeatherType = (state) => {
-  const currentWeather = selectCurrentWeather(state);
-  return get(currentWeather, 'weather[0].id');
-};
+export const selectWeatherType = createSelector(
+  selectCurrentWeather,
+  (current) => get(current, 'weather[0].main')
+);
 
-export const selectWeatherDescription = (state) => {
-  const currentWeather = selectCurrentWeather(state);
-  return get(currentWeather, 'weather[0].id');
-};
+export const selectWeatherDescription = createSelector(
+  selectCurrentWeather,
+  (current) => {
+    let description = get(current, 'weather[0].description');
+    if (!description) return description;
+    else if (description.includes(':')) return description.split(':')[0];
+    else return description;
+  }
+);
 
-// TODO: convert selectSunrise, selectSunset, and selectCurrentTime to createSelector
+export const selectTemperature = createSelector(
+  selectCurrentWeather,
+  (current) => get(current, 'main.temp')
+);
+
+export const selectFeelsLike = createSelector(selectCurrentWeather, (current) =>
+  get(current, 'main.feels_like')
+);
+
 export const selectSunrise = createSelector(
   selectCurrentWeather,
   (currentWeather) => {
@@ -121,4 +137,48 @@ export const selectTimeOfDay = createSelector(
       return 'twilight';
     }
   }
+);
+
+export const selectHumidity = createSelector(selectCurrentWeather, (current) =>
+  get(current, 'main.humidity')
+);
+
+export const selectRainfall = createSelector(
+  selectCurrentWeather,
+  (current) => {
+    const rainFall = get(current, 'rain.1h');
+    return rainFall ? mmToIn(rainFall) : undefined;
+  }
+);
+
+export const selectSnowfall = createSelector(
+  selectCurrentWeather,
+  (current) => {
+    const snowFall = get(current, 'snow.1h');
+    return snowFall ? mmToIn(snowFall) : undefined;
+  }
+);
+
+export const selectWind = createSelector(selectCurrentWeather, (current) => {
+  const speed = get(current, 'wind.speed');
+  const deg = get(current, 'wind.deg');
+  const gusts = get(current, 'wind.gust');
+  return {
+    speed,
+    direction: deg ? getWindDirection(deg) : undefined,
+    gusts,
+  };
+});
+
+export const selectPressure = createSelector(
+  selectCurrentWeather,
+  (current) => {
+    const pressure = get(current, 'main.pressure');
+    return pressure ? Math.round(getInHg(pressure) * 100) / 100 : undefined;
+  }
+);
+
+export const selectCloudCover = createSelector(
+  selectCurrentWeather,
+  (current) => get(current, 'clouds.all')
 );
