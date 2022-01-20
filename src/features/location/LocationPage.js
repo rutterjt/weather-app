@@ -5,17 +5,7 @@ import styled from 'styled-components';
 import WeatherImage from '../weather/WeatherImage';
 import LocationInput from './LocationInput';
 import LocationButton from './LocationButton';
-
-const Title = styled.h1`
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
-  text-align: center;
-  font-family: 'Open Sans';
-  font-weight: 900;
-  @media screen and (min-width: 768px) {
-    font-size: 3rem;
-  }
-`;
+import Title from '../../components/Title';
 
 const ImageWrap = styled.div`
   margin-bottom: 1.5rem;
