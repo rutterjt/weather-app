@@ -69,7 +69,7 @@ ErrorMessage.defaultProps = {
 ErrorMessage.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default ErrorMessage;
