@@ -12,6 +12,7 @@ import { fetchLocations, locationsCleared } from './locationSlice';
 export const Wrapper = styled.div`
   position: relative;
   min-width: 10rem;
+  ${(props) => props.theme.shadow};
 `;
 
 export const InputWrap = styled.div`
@@ -55,7 +56,6 @@ export const Input = styled.input`
   font-size: inherit;
   font-family: inherit;
   outline: none;
-  ${(props) => props.theme.shadow}
 
   &:focus {
     outline: 2px solid ${(props) => props.theme.palette.yellow.dark};
