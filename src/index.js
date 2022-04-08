@@ -1,40 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// store provider
 import { Provider } from 'react-redux';
 
-// global styling
-// import CSSReset from 'globalStyles';
+import '@fontsource/open-sans';
+import '@fontsource/nunito';
 
-// theme
-// import { GlobalThemeProvider } from 'styles/theme';
-
-// store
-import store from './app/store';
-
-// worker
 import { worker } from './api/server';
 
-// App
+import store from './app/store';
+
 import App from './App';
+import { saveState } from './app/localStorage';
 
-// store
-// import StoreProvider from 'store/context';
+import './styles/index.css';
 
-// worker.start({ onUnhandledRequest: 'bypass' });
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     {/* <StoreProvider> */}
-//     {/* <GlobalThemeProvider> */}
-//     {/* <CSSReset /> */}
-//     <App />
-//     {/* </GlobalThemeProvider> */}
-//     {/* </StoreProvider> */}
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
+store.subscribe(() => {
+  saveState({ location: store.getState().location });
+});
 
 async function start() {
   // Start our mock API server
@@ -43,10 +26,7 @@ async function start() {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        {/* <GlobalThemeProvider> */}
-        {/* <CSSReset /> */}
         <App />
-        {/* </GlobalThemeProvider> */}
       </Provider>
     </React.StrictMode>,
     document.getElementById('root')

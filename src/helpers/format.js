@@ -18,14 +18,6 @@ const windDegrees = [
   'N',
 ];
 
-export const capitalize = (str) => {
-  return str
-    .trim()
-    .split(' ')
-    .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-};
-
 export const getWindDirection = (deg) => {
   const index = (deg % 360) / 22.5;
   return windDegrees[Math.round(index)];

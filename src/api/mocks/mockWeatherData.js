@@ -1,6 +1,9 @@
 import setHours from 'date-fns/setHours';
+import addHours from 'date-fns/addHours';
 
 import { getRandomWeatherType } from './mockWeatherTypes';
+
+const seconds = (milliseconds) => Math.floor(milliseconds / 1000);
 
 const getRandom = (min, max) => Math.random() * (max - min + 1) + min;
 
@@ -39,13 +42,13 @@ export const mockWeatherData = {
     gust: getRandomInt(0, 45),
   },
   clouds: { all: getRandomInt(1, 100) },
-  dt: Date.now(),
+  dt: seconds(addHours(Date.now(), 2)),
   sys: {
     type: 2,
     id: 2004318,
     country: 'US',
-    sunrise: setHours(Date.now(), 7).getTime(),
-    sunset: setHours(Date.now(), 17).getTime(),
+    sunrise: seconds(setHours(Date.now(), 7).getTime()),
+    sunset: seconds(setHours(Date.now(), 17).getTime()),
   },
   snow: {
     '1h': getRandomInt(0, 200),

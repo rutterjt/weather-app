@@ -1,14 +1,7 @@
-export const isInRange =
-  (num) =>
-  ([min, max]) =>
-    num >= min && num <= max;
-
-export const isEmpty = (obj) => {
-  /* takes an object or array as an argument, returns whether the object or array has no members */
-  if (obj && Array.isArray(obj)) return obj.length === 0;
-  return (
-    obj &&
-    Object.keys(obj).length === 0 &&
-    Object.getPrototypeOf(obj) === Object.prototype
-  );
+/**
+ * Accepts a number, returns a function that accepts an array of two numbers representing a range. Returns true if the original number is within that range.
+ */
+export const isInRange = (num) => (range) => {
+  if (range.length === 1) return num === range[0];
+  else return num >= range[0] && num <= range[1];
 };

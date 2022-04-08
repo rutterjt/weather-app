@@ -2,6 +2,8 @@ import setHours from 'date-fns/setHours';
 import startOfHour from 'date-fns/startOfHour';
 import addHours from 'date-fns/addHours';
 
+const seconds = (milliseconds) => Math.floor(milliseconds / 1000);
+
 const setDateWithCounter = () => {
   let counter = -1;
   let timeStart = startOfHour(Date.now());
@@ -11,7 +13,9 @@ const setDateWithCounter = () => {
   };
 };
 
-const setDate = setDateWithCounter();
+const getNextDate = setDateWithCounter();
+
+const setDate = () => seconds(getNextDate());
 
 export const mockForecastData = {
   cod: '200',
@@ -1035,7 +1039,7 @@ export const mockForecastData = {
     country: 'US',
     population: 261310,
     timezone: -18000,
-    sunrise: setHours(Date.now(), 7).getTime(),
-    sunset: setHours(Date.now(), 17).getTime(),
+    sunrise: seconds(setHours(Date.now(), 7).getTime()),
+    sunset: seconds(setHours(Date.now(), 17).getTime()),
   },
 };
