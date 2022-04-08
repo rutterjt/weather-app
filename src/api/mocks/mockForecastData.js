@@ -13,7 +13,9 @@ const setDateWithCounter = () => {
   };
 };
 
-const setDate = () => seconds(setDateWithCounter());
+const getNextDate = setDateWithCounter();
+
+const setDate = () => seconds(getNextDate());
 
 export const mockForecastData = {
   cod: '200',

@@ -1,4 +1,5 @@
 import setHours from 'date-fns/setHours';
+import addHours from 'date-fns/addHours';
 
 import { getRandomWeatherType } from './mockWeatherTypes';
 
@@ -41,7 +42,7 @@ export const mockWeatherData = {
     gust: getRandomInt(0, 45),
   },
   clouds: { all: getRandomInt(1, 100) },
-  dt: seconds(Date.now()),
+  dt: seconds(addHours(Date.now(), 2)),
   sys: {
     type: 2,
     id: 2004318,
