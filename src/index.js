@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 
 import '@fontsource/open-sans';
 import '@fontsource/nunito';
-import CSSReset from './styles/globalStyles';
-import { GlobalThemeProvider } from './styles/theme';
 
 import { worker } from './api/server';
 
@@ -14,6 +12,8 @@ import store from './app/store';
 
 import App from './App';
 import { saveState } from './app/localStorage';
+
+import './styles/index.css';
 
 store.subscribe(() => {
   saveState({ location: store.getState().location });
@@ -26,10 +26,7 @@ async function start() {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <GlobalThemeProvider>
-          <CSSReset />
-          <App />
-        </GlobalThemeProvider>
+        <App />
       </Provider>
     </React.StrictMode>,
     document.getElementById('root')
