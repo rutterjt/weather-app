@@ -1,32 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const StyledErrorMessage = styled.div`
-  position: relative;
-  margin-top: 0.5rem;
-  background-color: #fff;
-  color: #000;
-  width: auto;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 2px solid ${(props) => props.theme.palette.yellow.light};
-  ${(props) => props.theme.shadow}
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -0.5rem;
-    width: 0;
-    height: 0;
-    border-left: 0.5rem solid transparent;
-    border-right: 0.5rem solid transparent;
-    border-bottom: 0.5rem solid ${(props) => props.theme.palette.yellow.light};
-    border-top-right-radius: 0.25rem;
-    border-top-left-radius: 0.25rem;
-  }
-`;
 
 const ErrorMessage = ({ open, handleClose, children }) => {
   const componentRef = useRef(null);
@@ -55,7 +29,12 @@ const ErrorMessage = ({ open, handleClose, children }) => {
 
   if (open) {
     return (
-      <StyledErrorMessage ref={componentRef}>{children}</StyledErrorMessage>
+      <div
+        className="relative mt-2 bg-white text-black w-auto p-2 rounded border-2 border-yellow-light shadow-lg before:absolute before:-top-2 before:w-0 before:h-0 before:border-l-[0.5rem] before:border-l-transparent before:border-r-[0.5rem] before:border-r-transparent before:border-b-[0.5rem] before:border-b-yellow-light rounded-t"
+        ref={componentRef}
+      >
+        {children}
+      </div>
     );
   } else {
     return null;

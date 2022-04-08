@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
 
-import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchWeather } from './weatherSlice';
@@ -11,42 +10,7 @@ import Header from './Header';
 import TempOverview from './TempOverview';
 import WeatherOverview from './WeatherOverview';
 import WeatherDetails from './WeatherDetails';
-
-const Wrapper = styled.div`
-  width: 100%;
-`;
-
-const Grid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-    gap: 2rem;
-  }
-`;
-
-const Col = styled.div`
-  flex: ${(props) => props.span || 1};
-`;
-
-const SpinnerWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  z-index: 2;
-  align-items: center;
-`;
-
-const ImageWrap = styled.div`
-  margin-bottom: 1.5rem;
-`;
+import ForecastOverview from '../forecast/ForecastOverview';
 
 const WeatherPage = () => {
   const dispatch = useDispatch();
@@ -65,9 +29,9 @@ const WeatherPage = () => {
 
   if (loadingStatus === 'loading') {
     return (
-      <SpinnerWrapper>
+      <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/80 flex justify-center items-center z-20">
         <Spinner size="lg" />
-      </SpinnerWrapper>
+      </div>
     );
   } else if (loadingStatus === 'failed') {
     return (
@@ -79,21 +43,22 @@ const WeatherPage = () => {
   }
 
   return (
-    <Wrapper>
+    <div className="w-full">
       <Header />
-      <Grid>
-        <Col span={5}>
-          <ImageWrap>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-8">
+        <div className="col-span-7">
+          <div className="mb-6">
             <WeatherImage />
-          </ImageWrap>
+          </div>
           <TempOverview />
-        </Col>
-        <Col span={4}>
+        </div>
+        <div className="col-span-5">
           <WeatherOverview />
           <WeatherDetails />
-        </Col>
-      </Grid>
-    </Wrapper>
+          <ForecastOverview />
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,8 +1,5 @@
 import React from 'react';
 
-// styled components
-import styled from 'styled-components';
-
 // utils
 import get from 'lodash/get';
 
@@ -44,15 +41,15 @@ The background color depends on the time of day and current weather event's code
  */
 const colors = [
   {
-    color: 'lightBlue',
+    color: 'from-lightBlue-light to-lightBlue-dark text-lightBlue-text',
     cases: [{ times: ['day'], ranges: [[800, 804]] }],
   },
   {
-    color: 'yellow',
+    color: 'from-yellow-light to-yellow-dark text-yellow-text',
     cases: [{ times: ['twilight'], ranges: [[800, 804]] }],
   },
   {
-    color: 'darkBlue',
+    color: 'from-darkBlue-light to-darkBlue-dark text-darkBlue-text',
     cases: [
       {
         times: ['night'],
@@ -65,26 +62,27 @@ const colors = [
     ],
   },
   {
-    color: 'green',
+    color: 'from-green-light to-green-dark text-green-text',
     cases: [{ times: ['twilight', 'day'], ranges: [[700, 799]] }],
   },
   {
-    color: 'purple',
+    color: 'from-purple-light to-purple-dark text-purple-text',
     cases: [
       { times: ['night'], ranges: [[700, 799]] },
       { ranges: [[200, 299]] },
     ],
   },
   {
-    color: 'cyan',
+    color: 'from-cyan-light to-cyan-dark text-cyan-text',
     cases: [{ times: ['day', 'twilight'], ranges: [[600, 699], [511]] }],
   },
   {
-    color: 'darkCyan',
+    color:
+      'from-darkCyanlightBlue-light to-darkCyanlightBlue-dark text-darkCyanlightBlue-text',
     cases: [{ times: ['night'], ranges: [[600, 699], [511]] }],
   },
   {
-    color: 'medBlue',
+    color: 'from-medBlue-light to-medBlue-dark text-medBlue-text',
     cases: [
       {
         times: ['day', 'twilight'],
@@ -96,18 +94,6 @@ const colors = [
     ],
   },
 ];
-
-// Styled components
-const Wrapper = styled.div`
-  overflow: hidden;
-  min-height: 100vh;
-  height: 100%;
-  width: 100%;
-
-  background: ${(props) =>
-    get(props.theme.gradients, `${props.color}`, '#fff')};
-  color: ${(props) => get(props.theme.palette, `${props.color}.text`, '#000')};
-`;
 
 /**
  * Wrapper component for the app's background color.
@@ -125,7 +111,11 @@ const Background = ({ children }) => {
 
   // Default to 'lightBlue' background if no weather code or time of day
   if (!weatherCode || !timeOfDay) {
-    return <Wrapper color={'lightBlue'}>{children}</Wrapper>;
+    <div
+      className={`overflow-hidden min-h-screen h-full w-full bg-gradient-to-br from-lightBlue-light to-lightBlue-dark text-lightBlue-text`}
+    >
+      {children}
+    </div>;
   }
 
   // deciding on background color
@@ -139,10 +129,19 @@ const Background = ({ children }) => {
   const isCorrectColor = ({ cases }) => cases.some(caseMatches);
 
   const color = colors.find(isCorrectColor);
-  const bg = get(color, 'color', 'lightBlue'); // fall back to lightblue if there was an error (e.g., timeOfDay/weatherCode combo does not yield a color, or the color object is missing a color key)
-  console.log('Color:', bg);
+  const classNames = get(
+    color,
+    'color',
+    'from-lightBlue-light to-lightBlue-dark text-lightBlue-text'
+  ); // fall back to lightblue if there was an error (e.g., timeOfDay/weatherCode combo does not yield a color, or the color object is missing a color key)
 
-  return <Wrapper color={bg}>{children}</Wrapper>;
+  return (
+    <div
+      className={`overflow-hidden min-h-screen h-full w-full bg-gradient-to-br ${classNames}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Background;

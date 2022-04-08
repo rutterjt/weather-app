@@ -1,36 +1,8 @@
 import React, { useState } from 'react';
 
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-
-const Wrapper = styled.section`
-  width: 100%;
-  min-width: 250px;
-  max-width: 450px;
-  margin: auto;
-  background-color: rgba(255, 255, 255, 0.95);
-  color: #000;
-  border-radius: 0.25rem;
-  padding: 1rem 2rem;
-  ${(props) => props.theme.shadow}
-  margin-bottom: 1rem;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
-
-const Trigger = styled.button`
-  display: block;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 /**
  * Renders a dropdown box.
@@ -44,13 +16,16 @@ const Dropdown = ({ title, openOnMount, children }) => {
 
   const toggle = () => setOpen((open) => !open);
   return (
-    <Wrapper>
-      <Trigger onClick={toggle}>
-        <Title>{title}</Title>
+    <section className="w-full min-w-[250px] max-w-[450px] mx-auto bg-white/95 text-black rounded py-4 px-8 shadow-lg mb-4">
+      <button
+        onClick={toggle}
+        className="w-full flex items-center justify-between"
+      >
+        <h2 className="mb-2 text-xl font-bold text-left">{title}</h2>
         {open ? <FaChevronUp /> : <FaChevronDown />}
-      </Trigger>
+      </button>
       {open && <div>{children}</div>}
-    </Wrapper>
+    </section>
   );
 };
 

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import styled from 'styled-components';
+// date util
 import format from 'date-fns/format';
-import { useSelector } from 'react-redux';
 
+// redux
+import { useSelector } from 'react-redux';
 import {
   selectCurrentTime,
   selectSunrise,
@@ -13,36 +14,9 @@ import {
   selectFeelsLike,
 } from './weatherSlice';
 
+// components
 import Temperature from './Temperature';
 import Dropdown from '../../components/Dropdown';
-
-const Description = styled.p`
-  margin-bottom: 1rem;
-`;
-
-const Grid = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;
-
-const Col = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-`;
-
-const Row = styled.span`
-  display: block;
-`;
-
-const Label = styled(Row)`
-  display: block;
-  margin-bottom: 0.25rem;
-  font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
-`;
 
 const WeatherOverview = () => {
   const now = useSelector(selectCurrentTime);
@@ -60,22 +34,22 @@ const WeatherOverview = () => {
       title={now > sunset ? "Tonight's Weather" : "Today's Weather"}
       openOnMount
     >
-      <Description>
+      <p className="mb-4">
         {format(new Date(now), 'EEEE, MMMM do, p')}. It is{' '}
         <Temperature>{temp}</Temperature>, and feels like{' '}
         <Temperature>{feelsLike}</Temperature>. The current weather:{' '}
         {description}.
-      </Description>
-      <Grid>
-        <Col>
-          <Label>Sunrise</Label>
-          <Row>{format(new Date(sunrise), 'p')}</Row>
-        </Col>
-        <Col>
-          <Label>Sunset</Label>
-          <Row>{format(new Date(sunset), 'p')}</Row>
-        </Col>
-      </Grid>
+      </p>
+      <div className="flex justify-between space-x-4">
+        <div className="flex flex-col mb-4">
+          <span className="mb-1 text-sm text-black/80">Sunrise</span>
+          <span>{format(new Date(sunrise), 'p')}</span>
+        </div>
+        <div className="flex flex-col mb-4">
+          <span className="mb-1 text-sm text-black/80">Sunset</span>
+          <span>{format(new Date(sunset), 'p')}</span>
+        </div>
+      </div>
     </Dropdown>
   );
 };

@@ -1,15 +1,5 @@
 import React from 'react';
-
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-export const BaseTemp = styled.span`
-  font-family: 'Nunito';
-`;
-
-const TempScale = styled.span`
-  font-size: 0.8em;
-`;
 
 /**
  * Renders a formatted temperature value.
@@ -18,13 +8,14 @@ const TempScale = styled.span`
  */
 const Temperature = ({ children, scale }) => {
   return (
-    <BaseTemp
+    <span
       aria-label={`${children} degrees ${
         scale === 'F' ? 'Fahrenheit' : 'Celsius'
       }`}
+      className="font-number"
     >
-      {Math.round(children)}°<TempScale>{scale}</TempScale>
-    </BaseTemp>
+      {Math.round(children)}°<span className="text-[0.8em]">{scale}</span>
+    </span>
   );
 };
 

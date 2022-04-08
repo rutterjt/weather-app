@@ -1,12 +1,13 @@
 import React from 'react';
 
-import styled from 'styled-components';
+// redux
 import { useSelector } from 'react-redux';
-
 import { selectWeatherCode, selectTimeOfDay } from './weatherSlice.js';
 
+// helper functions
 import { isInRange } from '../../helpers/utils';
 
+// images
 import {
   Thunderstorm,
   Rain,
@@ -59,19 +60,6 @@ const icons = [
   { icon: <HeavyClouds />, ranges: [[804, 804]] },
 ];
 
-// styled components
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 450px;
-  margin: auto;
-
-  & svg {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-`;
-
 /**
  * Renders a weather icon based on the current weatherCode and timeOfDay
  */
@@ -89,7 +77,11 @@ const WeatherImage = () => {
   const correctIcon = icons.find(isCorrectIcon);
   // const src = correctIcon ? correctIcon.icon : Rainbow;
 
-  return <Wrapper>{correctIcon ? correctIcon.icon : <Rainbow />}</Wrapper>;
+  return (
+    <div className="w-full max-w-[450px] mx-auto">
+      {correctIcon ? correctIcon.icon : <Rainbow />}
+    </div>
+  );
 };
 
 export default WeatherImage;

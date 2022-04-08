@@ -1,61 +1,14 @@
 import React from 'react';
 
+// redux
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
 import { selectTemperature, selectFeelsLike } from './weatherSlice';
 
+// images
 import { TempCold, TempWarm } from '../../images';
 
+// components
 import Temperature from './Temperature';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  margin-bottom: 2rem;
-
-  @media screen and (min-width: 768px) {
-    justify-content: flex-start;
-  }
-`;
-
-const TempWrapper = styled.div`
-  font-size: 3.5rem;
-  display: flex;
-`;
-
-const FeelsLikeWrapper = styled.div`
-  font-size: 1rem;
-`;
-
-const TempIcon = styled.div`
-  display: none;
-  max-width: 8rem;
-  margin-right: 0.5rem;
-
-  & svg {
-    max-width: 100%;
-    height: auto;
-  }
-
-  @media screen and (min-width: 768px) {
-    display: block;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  @media screen and (min-width: 768px) {
-    align-items: flex-start;
-  }
-`;
 
 const TempOverview = () => {
   const temp = useSelector(selectTemperature);
@@ -64,17 +17,19 @@ const TempOverview = () => {
   if (!temp || !feelsLike) return null;
 
   return (
-    <Wrapper>
-      <TempIcon>{temp > 40 ? <TempWarm /> : <TempCold />}</TempIcon>
-      <Content>
-        <TempWrapper>
+    <div className="flex justify-center items-center font-bold mb-8 md:justify-start">
+      <div className="hidden md:block max-w-[6rem] mr-2">
+        {temp > 40 ? <TempWarm /> : <TempCold />}
+      </div>
+      <div className="flex flex-col justify-center items-center md:items-start">
+        <div className="text-[3.5rem] flex">
           <Temperature>{temp}</Temperature>
-        </TempWrapper>
-        <FeelsLikeWrapper>
+        </div>
+        <div className="text-base">
           Feels Like: <Temperature>{feelsLike}</Temperature>
-        </FeelsLikeWrapper>
-      </Content>
-    </Wrapper>
+        </div>
+      </div>
+    </div>
   );
 };
 

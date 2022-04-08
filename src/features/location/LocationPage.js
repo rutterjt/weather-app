@@ -1,50 +1,26 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
+// components
 import WeatherImage from '../weather/WeatherImage';
 import LocationInput from './LocationInput';
 import LocationButton from './LocationButton';
-import Title from '../../components/Title';
-
-const ImageWrap = styled.div`
-  margin-bottom: 1.5rem;
-`;
-
-const ButtonGrid = styled.div`
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  & > * {
-    margin-bottom: 2rem;
-  }
-`;
-
-const GridItem = styled.div`
-  flex: 1 1 200px;
-  position: relative;
-`;
 
 const LocationPage = () => (
   <>
-    <Title>React Weather App</Title>
-    <ImageWrap>
+    <h1 className="text-[2rem] md:text-5xl text-center mb-2 font-black">
+      React Weather App
+    </h1>
+    <div className="mb-6">
       <WeatherImage />
-    </ImageWrap>
-    <ButtonGrid>
-      <GridItem>
+    </div>
+    <div className="max-w-[500px] mx-auto flex justify-between items-start flex-wrap gap-4">
+      <div className="mb-8 flex-[1_1_200px] relative">
         <LocationButton />
-      </GridItem>
-      <GridItem>
+      </div>
+      <div className="mb-8 flex-[1_1_200px] relative">
         <LocationInput />
-      </GridItem>
-    </ButtonGrid>
+      </div>
+    </div>
   </>
 );
 

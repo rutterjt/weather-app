@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import styled from 'styled-components';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchLocationFromBrowser } from './locationSlice';
 
 import { FaLocationArrow } from 'react-icons/fa';
-import { FilledButton } from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
-
-const StyledButton = styled(FilledButton)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-`;
 
 const LocationButton = () => {
   const dispatch = useDispatch();
@@ -37,9 +27,13 @@ const LocationButton = () => {
 
   return (
     <>
-      <StyledButton onClick={getLocationFromBrowser} color="yellow">
+      <button
+        className="relative py-7 px-4 rounded shadow-lg font-bold overflow-hidden cursor-pointer leading-none whitespace-nowrap w-full h-14 active:translate-y-[2px]  text-yellow-text bg-yellow-light hover:bg-yellow-dark transition-all flex items-center justify-center gap-2"
+        onClick={getLocationFromBrowser}
+        color="yellow"
+      >
         <FaLocationArrow /> Detect Location
-      </StyledButton>
+      </button>
       <ErrorMessage open={errorOpen} handleClose={closeError}>
         {fetchLocationError}
       </ErrorMessage>

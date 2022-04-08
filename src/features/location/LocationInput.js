@@ -2,65 +2,10 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import styled from 'styled-components';
-
 import LocationList from './LocationList';
 import ErrorMessage from '../../components/ErrorMessage';
 
 import { fetchLocations, locationsCleared } from './locationSlice';
-
-export const Wrapper = styled.div`
-  position: relative;
-  min-width: 10rem;
-  ${(props) => props.theme.shadow};
-`;
-
-export const InputWrap = styled.div`
-  position: relative;
-  border-radius: 0.25rem;
-  background-color: #fff;
-`;
-
-export const Label = styled.label`
-  position: absolute;
-  top: 1rem;
-  left: 0.75rem;
-  display: block;
-  color: black;
-  font-size: 1rem;
-  line-height: 1;
-  transition: all 0.2s;
-  ${'' /* font-weight: bold; */}
-  background-color: white;
-  transform-origin: left top 0px;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  transform: ${(props) =>
-    props.active ? 'translate(0rem, -1.6rem) scale(0.75)' : 'translateY(0);'};
-  ${(props) => (props.active ? 'z-index: 1;' : '')}
-  ${(props) =>
-    props.active
-      ? `border-top: 3px solid ${props.theme.palette.yellow.dark};`
-      : ''}
-`;
-
-export const Input = styled.input`
-  position: relative;
-  height: 3.5rem;
-  width: 100%;
-  font-size: 1rem;
-  padding: 1.25rem 1rem;
-  border-radius: 0.25rem;
-  border: none;
-  background-color: transparent;
-  font-size: inherit;
-  font-family: inherit;
-  outline: none;
-
-  &:focus {
-    outline: 2px solid ${(props) => props.theme.palette.yellow.dark};
-  }
-`;
 
 const LocationInput = () => {
   const dispatch = useDispatch();
@@ -115,12 +60,20 @@ const LocationInput = () => {
 
   return (
     <>
-      <Wrapper>
-        <InputWrap>
-          <Label htmlFor="location-input" active={active}>
+      <div className="relative min-w-[10rem]">
+        <div className="relative rounded bg-white shadow-lg">
+          <label
+            className={`absolute top-4 left-3 text-black text-base leading-none transition-all bg-white [transform-origin:left_top_0px] ${
+              active
+                ? '-translate-y-[1.6rem] scale-75 z-10 border-t-[3px] border-t-yellow-dark'
+                : 'translate-y-0'
+            } `}
+            htmlFor="location-input"
+          >
             Enter Location
-          </Label>
-          <Input
+          </label>
+          <input
+            className="relative h-14 w-full outline-none py-5 px-4 rounded border-none bg-transparent focus:ring-2 focus:ring-yellow-dark"
             type="text"
             value={input}
             onChange={updateInput}
@@ -128,9 +81,9 @@ const LocationInput = () => {
             onBlur={handleBlur}
             disabled={status === 'loading'}
           />
-        </InputWrap>
+        </div>
         <LocationList open={active} />
-      </Wrapper>
+      </div>
       <ErrorMessage open={errorOpen} handleClose={closeError}>
         {fetchLocationsError}
       </ErrorMessage>

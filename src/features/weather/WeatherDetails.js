@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styled from 'styled-components';
+// redux
 import { useSelector } from 'react-redux';
-
 import {
   selectFeelsLike,
   selectTemperature,
@@ -14,35 +13,21 @@ import {
   selectCloudCover,
 } from './weatherSlice';
 
+// components
 import Temperature from './Temperature';
 import Dropdown from '../../components/Dropdown';
 
-const DetailsList = styled.ul``;
+const Row = ({ children }) => (
+  <li className="py-3 border-b-[1px] border-b-black/30 flex flex-col justify-between items-start">
+    {children}
+  </li>
+);
 
-const Row = styled.li`
-  padding-bottom: 0.75rem;
-  padding-top: 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  &:first-child {
-    padding-top: 0;
-  }
-  &:last-child {
-    border-bottom: none;
-  }
-`;
+const Label = ({ children }) => (
+  <span className="block mb-1 text-sm text-black/80 pt-0">{children}</span>
+);
 
-const Label = styled.span`
-  display: block;
-  margin-bottom: 0.25rem;
-  font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.8);
-`;
-
-const Col = styled.span``;
+const Value = ({ children }) => <span className="border-none">{children}</span>;
 
 const WeatherDetails = () => {
   const temp = useSelector(selectTemperature);
@@ -57,68 +42,68 @@ const WeatherDetails = () => {
 
   return (
     <Dropdown title="Current Conditions">
-      <DetailsList>
+      <ul>
         {temp && (
           <Row>
             <Label>Temperature</Label>
-            <Col>
+            <Value>
               <Temperature>{temp}</Temperature>
-            </Col>
+            </Value>
           </Row>
         )}
         {feelsLike && (
           <Row>
             <Label>Feels Like</Label>
-            <Col>
+            <Value>
               <Temperature>{feelsLike}</Temperature>
-            </Col>
+            </Value>
           </Row>
         )}
         {humidity && (
           <Row>
             <Label>Humidity</Label>
-            <Col>{humidity}%</Col>
+            <Value>{humidity}%</Value>
           </Row>
         )}
         {hourlyRainfall && (
           <Row>
             <Label>Rainfall (last hour)</Label>
-            <Col>{hourlyRainfall} in</Col>
+            <Value>{hourlyRainfall} in</Value>
           </Row>
         )}
         {hourlySnowfall && (
           <Row>
             <Label>Snowfall (last hour)</Label>
-            <Col>{hourlySnowfall} in</Col>
+            <Value>{hourlySnowfall} in</Value>
           </Row>
         )}
         {windSpeed && windDirection && (
           <Row>
             <Label>Wind</Label>
-            <Col>
+            <Value>
               {windDirection}, {windSpeed} mph
-            </Col>
+            </Value>
           </Row>
         )}
         {windGusts && (
           <Row>
             <Label>Wind Gusts</Label>
-            <Col>{windGusts} mph</Col>
+            <Value>{windGusts} mph</Value>
           </Row>
         )}
         {pressure && (
           <Row>
             <Label>Pressure</Label>
-            <Col>{pressure} inHg</Col>
+            <Value>{pressure} inHg</Value>
           </Row>
         )}
         {cloudCover && (
           <Row>
             <Label>Cloud cover</Label>
-            <Col>{cloudCover}%</Col>
+            <Value>{cloudCover}%</Value>
           </Row>
         )}
-      </DetailsList>
+      </ul>
     </Dropdown>
   );
 };
