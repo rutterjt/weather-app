@@ -1,13 +1,13 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
+type Props = {
+  size?: 'sm' | 'md' | 'lg';
+};
 
 /**
  * Renders a spinner component to display during loading times.
- *
- * @param {string} size - (Optional) the spinner size, one of: 'sm', 'md', 'lg'. Defaults to 'md'.
  */
-const Spinner = ({ size }) => {
+export const Spinner: React.FC<Props> = ({ size = 'lg' }) => {
   const diameter =
     size === 'sm'
       ? 'w-[2rem] h-[2rem]'
@@ -20,15 +20,3 @@ const Spinner = ({ size }) => {
     />
   );
 };
-
-Spinner.defaultProps = {
-  color: 'white',
-  size: 'md',
-};
-
-Spinner.propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-};
-
-export default Spinner;

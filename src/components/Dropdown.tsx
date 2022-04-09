@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
-import PropTypes from 'prop-types';
-
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+
+type Props = {
+  title: string;
+  openOnMount?: boolean;
+};
 
 /**
  * Renders a dropdown box.
- *
- * @param {string} title - The heading for the dropdown.
- * @param {boolean} openOnMount - (Optional) whether the dropdown is initially open.
- * @param {any} children - The dropdown content.
  */
-const Dropdown = ({ title, openOnMount, children }) => {
+export const Dropdown: React.FC<Props> = ({ title, openOnMount, children }) => {
   const [open, setOpen] = useState(openOnMount);
 
   const toggle = () => setOpen((open) => !open);
@@ -28,15 +27,3 @@ const Dropdown = ({ title, openOnMount, children }) => {
     </section>
   );
 };
-
-Dropdown.defaultProps = {
-  openOnMount: false,
-};
-
-Dropdown.propTypes = {
-  title: PropTypes.string.isRequired,
-  openOnMount: PropTypes.bool,
-  children: PropTypes.node,
-};
-
-export default Dropdown;

@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 
-import PropTypes from 'prop-types';
+type Props = {
+  open: boolean;
+  handleClose: () => void;
+};
 
-const ErrorMessage = ({ open, handleClose, children }) => {
+export const ErrorMessage: React.FC<Props> = ({
+  open,
+  handleClose,
+  children,
+}) => {
   const componentRef = useRef(null);
 
   // setting/unsetting the click-away listener
@@ -40,15 +47,3 @@ const ErrorMessage = ({ open, handleClose, children }) => {
     return null;
   }
 };
-
-ErrorMessage.defaultProps = {
-  open: false,
-};
-
-ErrorMessage.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
-
-export default ErrorMessage;
