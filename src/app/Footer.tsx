@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => (
+export const Footer: React.FC = () => (
   <footer className="text-center p-8">
     <p className="text-sm font-bold">
       Copyright {new Date().getFullYear()},{' '}
@@ -16,5 +16,3 @@ const Footer = () => (
     </p>
   </footer>
 );
-
-export default React.memo(Footer);
