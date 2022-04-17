@@ -1,66 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-// components
-import LandingPage from 'components/LandingPage';
-import WeatherPage from 'components/WeatherPage';
+import { isEmpty } from 'lodash';
+import { useSelector } from 'react-redux';
 
-// api
-import { geolocationFetch } from 'api';
+import { selectLocationCoords } from './features/location/locationSlice';
 
-const isStale = (time) => {
-  return Date.now() > time + 600000;
-};
-
-// localStorage getter/setter functions
-const saveWeather = (data) => {
-  localStorage.setItem('weather', JSON.stringify(data));
-  localStorage.setItem('time', JSON.stringify(Date.now()));
-};
-const getItem = (item) => localStorage.getItem(item);
-const read = (item) => JSON.parse(getItem(item));
-const readWeather = () => read('weather');
-const readTime = () => read('time');
+import WeatherPage from './features/weather/WeatherPage';
+import LocationPage from './features/location/LocationPage';
+import Background from './app/Background';
+import Layout from './app/Layout';
+import Footer from './app/Footer';
 
 const App = () => {
-  const [weather, setWeather] = useState(() => {
-    return localStorage.getItem('weather') ? readWeather() : '';
-  });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const location = useSelector(selectLocationCoords);
 
-  // fetches weather data from the api
-  const fetchWeather = () => {
-    setLoading(true);
-    geolocationFetch('weather')
-      .then((data) => {
-        setWeather(data);
-        saveWeather(data);
-        setError('');
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => setLoading(false));
-  };
+  const isLocation = location && !isEmpty(location);
 
-  // landing page: renders if no weather data has ever been fetched, or if the localStorage is not
-  if (!weather || isStale(readTime()))
-    return (
-      <LandingPage
-        fetchWeather={fetchWeather}
-        error={error}
-        loading={loading}
-      />
-    );
-  else
-    return (
-      <WeatherPage
-        weather={weather}
-        fetchWeather={fetchWeather}
-        error={error}
-        loading={loading}
-      />
-    );
+  let appContent = isLocation ? <WeatherPage /> : <LocationPage />;
+
+  return (
+    <Background>
+      <Layout>{appContent}</Layout>
+      <Footer />
+    </Background>
+  );
 };
 
 export default App;
