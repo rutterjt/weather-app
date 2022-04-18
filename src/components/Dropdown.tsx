@@ -15,15 +15,15 @@ export const Dropdown: React.FC<Props> = ({ title, openOnMount, children }) => {
 
   const toggle = () => setOpen((open) => !open);
   return (
-    <section className="w-full min-w-[250px] max-w-[450px] mx-auto bg-white/95 text-black rounded py-4 px-8 shadow-lg mb-4">
+    <section className="w-full min-w-[250px] max-w-[450px] mx-auto bg-gradient-to-br from-white/100 to-white/95 text-black rounded py-4 shadow-lg mb-4">
       <button
         onClick={toggle}
-        className="w-full flex items-center justify-between"
+        className="w-full flex items-center justify-between px-8"
       >
         <h2 className="mb-2 text-xl font-bold text-left">{title}</h2>
         {open ? <FaChevronUp /> : <FaChevronDown />}
       </button>
-      {open && <div>{children}</div>}
+      {open && <div className="max-h-72 overflow-y-auto px-8 ">{children}</div>}
     </section>
   );
 };
