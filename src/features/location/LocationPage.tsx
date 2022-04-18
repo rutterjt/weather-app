@@ -1,16 +1,16 @@
 import React from 'react';
 
 // components
-import WeatherImage from '../weather/WeatherImage';
-import LocationInput from './LocationInput';
-import LocationButton from './LocationButton';
+import { WeatherImage } from '../weather/WeatherImage';
+import { LocationInput } from './LocationInput';
+import { LocationButton } from './LocationButton';
 
-const LocationPage = () => (
+export const LocationPage: React.FC = () => (
   <>
-    <h1 className="text-[2rem] md:text-5xl text-center mb-2 font-black">
-      React Weather App
+    <h1 className="text-[2rem] md:text-6xl text-center mb-4 md:mb-12 font-black tracking-wide font-heading">
+      Weatherlite
     </h1>
-    <div className="mb-6">
+    <div className="mb-6 flex justify-center">
       <WeatherImage />
     </div>
     <div className="max-w-[500px] mx-auto flex justify-between items-start flex-wrap gap-4">
@@ -23,5 +23,3 @@ const LocationPage = () => (
     </div>
   </>
 );
-
-export default LocationPage;

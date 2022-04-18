@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { fetchLocationFromBrowser } from './locationSlice';
 
 import { FaLocationArrow } from 'react-icons/fa';
-import ErrorMessage from '../../components/ErrorMessage';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
-const LocationButton = () => {
-  const dispatch = useDispatch();
-  const fetchLocationError = useSelector(
+export const LocationButton: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const fetchLocationError = useAppSelector(
     (state) => state.location.current.error
   );
   const [errorOpen, setErrorOpen] = useState(!!fetchLocationError); // maintain separate state for error ui, so the error message can be closed
@@ -40,5 +40,3 @@ const LocationButton = () => {
     </>
   );
 };
-
-export default LocationButton;

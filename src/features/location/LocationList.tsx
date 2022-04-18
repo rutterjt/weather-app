@@ -3,21 +3,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import isEmpty from 'lodash/isEmpty';
-import { useSelector, useDispatch } from 'react-redux';
 
-import { locationAdded, selectLocations } from './locationSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import Spinner from '../../components/Spinner';
+import { locationAdded, selectLocations, Location } from './locationSlice';
+
+import { Spinner } from '../../components/Spinner';
+
+type Props = {
+  open: boolean;
+};
 
 /**
  * Renders a dropdown list of locations for the user to choose from.
  *
  * Clicking on a list item sets it as the current location.
  */
-const LocationList = ({ open }) => {
-  const dispatch = useDispatch();
-  const locations = useSelector(selectLocations);
-  const status = useSelector((state) => state.location.locations.status);
+export const LocationList: React.FC<Props> = ({ open }) => {
+  const dispatch = useAppDispatch();
+  const locations = useAppSelector(selectLocations);
+  const status = useAppSelector((state) => state.location.locations.status);
 
   if (status === 'loading') {
     return (
@@ -27,8 +32,8 @@ const LocationList = ({ open }) => {
     );
   }
 
-  const addLocation = (coords, name, fullName) => {
-    dispatch(locationAdded({ coords, name, fullName }));
+  const addLocation = (location: Location) => {
+    dispatch(locationAdded(location));
   };
 
   let locationListContent;
@@ -39,7 +44,7 @@ const LocationList = ({ open }) => {
         <li className="border-b-[1px] border-b-black/20 block" key={index}>
           <button
             className="block p-4 text-left w-full font-normal hover:bg-white/95 transition-all"
-            onClick={() => addLocation(coords, name, fullName)}
+            onClick={() => addLocation({ coords, name, fullName })}
           >
             {fullName}
           </button>
@@ -62,5 +67,3 @@ const LocationList = ({ open }) => {
 LocationList.propTypes = {
   open: PropTypes.bool.isRequired,
 };
-
-export default LocationList;

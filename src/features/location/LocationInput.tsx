@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import LocationList from './LocationList';
-import ErrorMessage from '../../components/ErrorMessage';
+import { LocationList } from './LocationList';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 import { fetchLocations, locationsCleared } from './locationSlice';
 
-const LocationInput = () => {
-  const dispatch = useDispatch();
-  const fetchLocationsError = useSelector(
+export const LocationInput: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const fetchLocationsError = useAppSelector(
     (state) => state.location.locations.error
   );
   const [errorOpen, setErrorOpen] = useState(!!fetchLocationsError); // maintain separate state for error ui, so the error message can be closed
   const [input, setInput] = useState('');
   const initial = useRef(true); // prevent geolocation fetch on page load
   const [active, setActive] = useState(false);
-  const status = useSelector((state) => state.location.locations.status);
+  const status = useAppSelector((state) => state.location.locations.status);
 
   const getLocations = useCallback(
     (query) => {
@@ -45,7 +45,6 @@ const LocationInput = () => {
     }
   }, [input, getLocations, clearLocations]);
 
-  const updateInput = (e) => setInput(e.target.value);
   const handleFocus = () => setActive(true);
   const handleBlur = () => {
     if (input === '') setActive(false);
@@ -76,7 +75,7 @@ const LocationInput = () => {
             className="relative h-14 w-full outline-none py-5 px-4 rounded border-none bg-transparent focus:ring-2 focus:ring-yellow-dark"
             type="text"
             value={input}
-            onChange={updateInput}
+            onChange={(e) => setInput(e.target.value)}
             onFocus={handleFocus}
             onBlur={handleBlur}
             disabled={status === 'loading'}
@@ -90,5 +89,3 @@ const LocationInput = () => {
     </>
   );
 };
-
-export default LocationInput;
