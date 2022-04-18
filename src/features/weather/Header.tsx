@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 
 import { selectLocationName } from '../location/locationSlice';
 import { selectWeatherDescription } from './weatherSlice';
 
-const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase();
+const capitalize = (str: string) =>
+  str[0].toUpperCase() + str.slice(1).toLowerCase();
 
-const Header = () => {
-  const placeName = useSelector(selectLocationName);
-  const description = useSelector(selectWeatherDescription);
+export const Header: React.FC = () => {
+  const placeName = useAppSelector(selectLocationName);
+  const description = useAppSelector(selectWeatherDescription);
   if (!placeName || !description) return null;
   return (
     <header className="mb-8 text-center font-bold">
@@ -18,5 +19,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;
