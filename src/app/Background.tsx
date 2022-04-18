@@ -1,8 +1,5 @@
 import React from 'react';
 
-// utils
-import get from 'lodash/get';
-
 // redux
 import { useSelector } from 'react-redux';
 
@@ -31,6 +28,17 @@ The background color depends on the time of day and current weather event's code
 200-299: purple 
 */
 
+type Range = number[];
+type Time = 'day' | 'night' | 'twilight';
+type Case = {
+  times?: Time[];
+  ranges?: Range[];
+};
+type Color = {
+  color: string;
+  cases: Case[];
+};
+
 /**
  * Array containing mappings of color strings to 'cases'.
  *
@@ -39,7 +47,7 @@ The background color depends on the time of day and current weather event's code
  * The case can include either/both: an array of times (of 'day', 'twilight', or 'night'), and an array of ranges (each a subarray representing a range of color codes )
  *
  */
-const colors = [
+const colors: Color[] = [
   {
     color: 'from-lightBlue-light to-lightBlue-dark text-lightBlue-text',
     cases: [{ times: ['day'], ranges: [[800, 804]] }],
@@ -77,8 +85,7 @@ const colors = [
     cases: [{ times: ['day', 'twilight'], ranges: [[600, 699], [511]] }],
   },
   {
-    color:
-      'from-darkCyanlightBlue-light to-darkCyanlightBlue-dark text-darkCyanlightBlue-text',
+    color: 'from-darkCyan-light to-darkCyan-dark text-darkCyan-text',
     cases: [{ times: ['night'], ranges: [[600, 699], [511]] }],
   },
   {
@@ -100,7 +107,7 @@ const colors = [
  *
  * Selects the current weather code and time of day, and sets the app's background color and color based on those factors.
  */
-const Background = ({ children }) => {
+export const Background: React.FC = ({ children }) => {
   const weatherCode = useSelector(selectWeatherCode);
   const timeOfDay = useSelector(selectTimeOfDay);
 
@@ -121,19 +128,19 @@ const Background = ({ children }) => {
   // deciding on background color
 
   // helper functions
-  const isInWeatherRange = ({ ranges }) => ranges.some(isInRange(weatherCode));
-  const isTimeOfDay = ({ times }) =>
+  // TODO: see if I can refactor this. These functions proved to be very confusing on revisiting, and there must be a clearer way to write this
+  const isInWeatherRange = ({ ranges }: Case) =>
+    ranges && weatherCode ? ranges.some(isInRange(weatherCode)) : false;
+  const isTimeOfDay = ({ times }: Case) =>
     times ? times.indexOf(timeOfDay) !== -1 : true;
-  const caseMatches = (testCase) =>
+  const caseMatches = (testCase: Case) =>
     isTimeOfDay(testCase) && isInWeatherRange(testCase);
-  const isCorrectColor = ({ cases }) => cases.some(caseMatches);
+  const isCorrectColor = ({ cases }: Color) => cases.some(caseMatches);
 
   const color = colors.find(isCorrectColor);
-  const classNames = get(
-    color,
-    'color',
-    'from-lightBlue-light to-lightBlue-dark text-lightBlue-text'
-  ); // fall back to lightblue if there was an error (e.g., timeOfDay/weatherCode combo does not yield a color, or the color object is missing a color key)
+  const classNames =
+    color?.color ||
+    'from-lightBlue-light to-lightBlue-dark text-lightBlue-text'; // fall back to lightblue if there was an error (e.g., timeOfDay/weatherCode combo does not yield a color, or the color object is missing a color key)
 
   return (
     <div
@@ -143,5 +150,3 @@ const Background = ({ children }) => {
     </div>
   );
 };
-
-export default Background;
