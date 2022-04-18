@@ -1,15 +1,15 @@
 import React from 'react';
 
 // redux
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 import { selectForecastIds } from './forecastSlice';
 
 // components
-import Dropdown from '../../components/Dropdown';
-import ForecastItem from './ForecastItem';
+import { Dropdown } from '../../components/Dropdown';
+import { ForecastItem } from './ForecastItem';
 
-const ForecastOverview = () => {
-  const ids = useSelector(selectForecastIds);
+export const ForecastOverview: React.FC = () => {
+  const ids = useAppSelector(selectForecastIds);
 
   const listContent = ids.map((id, index) => (
     <ForecastItem id={id} key={index} />
@@ -21,5 +21,3 @@ const ForecastOverview = () => {
     </Dropdown>
   );
 };
-
-export default ForecastOverview;
