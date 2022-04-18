@@ -5,11 +5,9 @@ import { useSelector } from 'react-redux';
 
 import { selectLocationCoords } from './features/location/locationSlice';
 
-import WeatherPage from './features/weather/WeatherPage';
-import LocationPage from './features/location/LocationPage';
-import Background from './app/Background';
-import Layout from './app/Layout';
-import Footer from './app/Footer';
+import { WeatherPage } from './features/weather/WeatherPage';
+import { LocationPage } from './features/location/LocationPage';
+import { Layout } from './app/Layout';
 
 const App = () => {
   const location = useSelector(selectLocationCoords);
@@ -18,12 +16,7 @@ const App = () => {
 
   let appContent = isLocation ? <WeatherPage /> : <LocationPage />;
 
-  return (
-    <Background>
-      <Layout>{appContent}</Layout>
-      <Footer />
-    </Background>
-  );
+  return <Layout>{appContent}</Layout>;
 };
 
 export default App;
