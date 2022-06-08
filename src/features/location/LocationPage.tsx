@@ -13,11 +13,11 @@ export const LocationPage: React.FC = () => (
     <div className="mb-6 flex justify-center">
       <WeatherImage />
     </div>
-    <div className="max-w-[500px] mx-auto flex justify-between items-start flex-wrap gap-4">
-      <div className="mb-8 flex-[1_1_200px] relative">
+    <div className="max-w-[500px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div className="mb-8 flex-1">
         <LocationButton />
       </div>
-      <div className="mb-8 flex-[1_1_200px] relative">
+      <div className="mb-8 flex-1">
         <LocationInput />
       </div>
     </div>

@@ -26,9 +26,9 @@ export const LocationButton: React.FC = () => {
   }, [fetchLocationError]);
 
   return (
-    <>
+    <div>
       <button
-        className="relative py-7 px-4 rounded shadow-lg font-bold overflow-hidden cursor-pointer leading-none whitespace-nowrap w-full h-14 active:translate-y-[2px]  text-yellow-text bg-yellow-light hover:bg-yellow-dark transition-all flex items-center justify-center gap-2"
+        className="relative py-4 px-8 rounded shadow-lg font-bold overflow-hidden cursor-pointer w-full whitespace-nowrap active:translate-y-[2px]  text-yellow-text bg-yellow-light leading-normal hover:bg-yellow-dark transition-all flex items-center justify-center gap-2"
         onClick={getLocationFromBrowser}
         color="yellow"
       >
@@ -37,6 +37,6 @@ export const LocationButton: React.FC = () => {
       <ErrorMessage open={errorOpen} handleClose={closeError}>
         {fetchLocationError}
       </ErrorMessage>
-    </>
+    </div>
   );
 };

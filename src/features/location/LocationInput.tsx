@@ -58,21 +58,19 @@ export const LocationInput: React.FC = () => {
   }, [fetchLocationsError]);
 
   return (
-    <>
+    <div>
       <div className="relative min-w-[10rem]">
         <div className="relative rounded bg-white shadow-lg">
           <label
-            className={`absolute top-4 left-3 text-black text-base leading-none transition-all bg-white [transform-origin:left_top_0px] ${
-              active
-                ? '-translate-y-[1.6rem] scale-75 z-10 border-t-[3px] border-t-yellow-dark'
-                : 'translate-y-0'
+            className={`absolute top-4 left-3 text-black text-base transition-all bg-white [transform-origin:left_top_0px] leading-normal ${
+              active ? '-translate-y-4 scale-[65%] z-10' : 'translate-y-0'
             } `}
             htmlFor="location-input"
           >
             Enter Location
           </label>
           <input
-            className="relative h-14 w-full outline-none py-5 px-4 rounded border-none bg-transparent focus:ring-2 focus:ring-yellow-dark"
+            className="relative w-full outline-none py-4 px-8 rounded border-none bg-transparent focus:ring-2 focus:ring-yellow-dark"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -86,6 +84,6 @@ export const LocationInput: React.FC = () => {
       <ErrorMessage open={errorOpen} handleClose={closeError}>
         {fetchLocationsError}
       </ErrorMessage>
-    </>
+    </div>
   );
 };
