@@ -1,25 +1,67 @@
-import { LocationState } from '../features/location/locationSlice';
+import type { Location } from '../types';
 
-export const loadState = () => {
-  return undefined;
-  // try {
-  //   const serializedState = localStorage.getItem('state');
-  //   if (serializedState === null) {
-  //     return undefined;
-  //   }
-  //   return JSON.parse(serializedState);
-  // } catch (err) {
-  //   return undefined;
-  // }
+const isLocation = (location: any): location is Location => {
+  return (
+    typeof location?.name === 'string' &&
+    typeof location?.lat === 'number' &&
+    typeof location?.lon === 'number'
+  );
 };
 
-export const saveState = (state: LocationState) => {
+/**
+ * Attempts to get the persisted location from localStorage.
+ *
+ * Returns an object of type Location, or null.
+ */
+export const readLocation = () => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
-  } catch (err) {
-    console.warn(
-      'Warning: error while trying to persist state to localStorage.'
+    const persistedState = localStorage.getItem('location');
+    // if no state, return null
+    if (!persistedState) return null;
+    const parsedState = JSON.parse(persistedState);
+    if (isLocation(parsedState)) {
+      return parsedState;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    let message =
+      'An unknown error occurred while trying to read persisted location in localStorage.';
+    if (error instanceof Error) message = error.message;
+    console.error(message);
+    return null;
+  }
+};
+
+/**
+ * Persists location data to localStorage
+ */
+export const setLocation = (location: Location) => {
+  try {
+    if (isLocation(location)) {
+      localStorage.setItem('location', JSON.stringify(location));
+    } else {
+      throw new Error(
+        'Location data is incorrectly formatted and cannot be persisted to localStorage.'
+      );
+    }
+  } catch (error) {
+    let message =
+      'An unknown error occurred while trying to persist location to localStorage.';
+    if (error instanceof Error) message = error.message;
+    console.error(message);
+  }
+};
+
+/**
+ * Removes location data from localStorage
+ */
+export const clearLocation = () => {
+  try {
+    localStorage.removeItem('location');
+  } catch (error) {
+    console.error(
+      "An error occurred while trying to delete the location data from localStorage. Please use your browser's settings to delete the data instead."
     );
   }
 };
