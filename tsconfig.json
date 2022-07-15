@@ -16,7 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strictNullChecks": true
-    // "noImplicitAny": false
   },
-  "include": ["src", "src/custom.d.ts", "netlify/functions"]
+  "include": ["src", "src/custom.d.ts", "api"]
 }
